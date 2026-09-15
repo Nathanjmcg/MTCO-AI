@@ -1,6 +1,10 @@
 {
   "_comment": "Single source of truth for the MTCO AI Roadmap. Ken appends proposals here; app.py injects it into dashboard.html at render. Stages: Proposed, Scoped, Planned, Building, Testing, Shipped.",
-  "active": ["mtco", "kensite", "aes"],
+  "active": [
+    "mtco",
+    "kensite",
+    "aes"
+  ],
   "categories": [
     "Operations",
     "Hire Desk and Sales",
@@ -11,5 +15,30 @@
     "People and HR",
     "IT and Data"
   ],
-  "projects": []
+  "projects": [
+    {
+      "id": "aes-auto-updating-schedule-for-aes",
+      "company": "aes",
+      "name": "Auto Updating Schedule for AES",
+      "stage": "Proposed",
+      "category": "Transport and Logistics",
+      "owner": "Nathan Mcguinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Auto-updates the AES schedule and diary from Big Change job entries so the management software and the besp...",
+      "scope": "Auto-updates the AES schedule and diary from Big Change job entries so the management software and the bespoke planner match at all times, eliminating the need for manual data entry and removing the risk of mis-communication and human error.",
+      "how": "Reads job entries from Big Change and automatically syncs or pushes them into the AES management software and bespoke planner/diary, so both systems match continuously without manual re-entry.",
+      "who": [
+        {
+          "who": "AES scheduling and transport team",
+          "how": "saves significant time currently spent on manual diary entries"
+        },
+        {
+          "who": "reduces human error and mis-communication between systems",
+          "how": ""
+        }
+      ],
+      "proposed_at": "2026-09-15"
+    }
+  ]
 }
