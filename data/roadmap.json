@@ -1,0 +1,15 @@
+{
+  "_comment": "Single source of truth for the MTCO AI Roadmap. Ken appends proposals here; app.py injects it into dashboard.html at render. Stages: Proposed, Scoped, Planned, Building, Testing, Shipped.",
+  "active": ["mtco", "kensite", "aes"],
+  "categories": [
+    "Operations",
+    "Hire Desk and Sales",
+    "Transport and Logistics",
+    "Workshop and Yard",
+    "HSEQ and Compliance",
+    "Finance",
+    "People and HR",
+    "IT and Data"
+  ],
+  "projects": []
+}
