@@ -39,6 +39,34 @@
         }
       ],
       "proposed_at": "2026-09-15"
+    },
+    {
+      "id": "aes-aes-service-agent",
+      "company": "aes",
+      "name": "AES Service Agent",
+      "stage": "Proposed",
+      "category": "HSEQ and Compliance",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Answer service scheduling questions from Big Change (\"when is the service at WA4 for this customer\") in nat...",
+      "scope": "Answer service scheduling questions from Big Change (\"when is the service at WA4 for this customer\") in natural language. If the service has already happened, it pulls the completed job sheet and presents it to the person asking. Saves the service team and customers from manually searching Big Change for service records.",
+      "how": "Interrogates Big Change data to find scheduled service jobs by customer or location (e.g. postcode WA4), returning the next due service date and type. For completed services, it pulls the job sheet from Big Change and presents it. Could be a chat interface that answers natural language service queries.",
+      "who": [
+        {
+          "who": "AES service team",
+          "how": "quicker answers to service schedule queries"
+        },
+        {
+          "who": "office team",
+          "how": "no more manual digging through Big Change for service dates"
+        },
+        {
+          "who": "customers",
+          "how": "faster responses when they ask \"when's my next service\""
+        }
+      ],
+      "proposed_at": "2026-09-16"
     }
   ]
 }
