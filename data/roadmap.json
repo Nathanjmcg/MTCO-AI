@@ -95,6 +95,26 @@
         }
       ],
       "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-the-pizza-tracker-automated-customer-delivery-cycle",
+      "company": "kensite",
+      "name": "The Pizza Tracker - Automated Customer Delivery Cycle",
+      "stage": "Proposed",
+      "category": "Operations",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "A fully automated customer communication cycle covering every stage from ordering through to delivery and c...",
+      "scope": "A fully automated customer communication cycle covering every stage from ordering through to delivery and collection - 'like tracking a Domino's pizza'. Covers: intelligent automated ordering (building on the site planner), order confirmation, customer PO checked against order and contract to flag issues before production starts, auto-notification 48 hours before delivery (last chance to modify without charge), quality-checked cabin photos shared with the customer, 'on its way' notification with live tracking link, and delivery confirmation with driver pictures and POD. Extends to collections, repairs and servicing.",
+      "how": "The system connects Kensite's order/contract data (MCS), the production/prep schedule and the transport planner (Big Change/AES) into a customer-facing notification pipeline. At each stage - order placed, PO validated against order, production started, 48-hour lock-in approaching, unit dispatched with tracking, delivery complete with POD - an automated message or portal update is triggered. Customers receive a link (like a Domino's Pizza Tracker) to see where their cabin is in the process without phoning the hire desk. The same cycle applies to collections, repairs and servicing.",
+      "who": [
+        {
+          "who": "Customers",
+          "how": "full visibility without phoning in, pre-emptive updates at every stage - a genuinely pre-emptive experience. Hire desk and Ops team: fewer inbound calls chasing order status, admin issues caught and resolved before production starts. Transport team: automated POD distribution replaces manual chasing."
+        }
+      ],
+      "proposed_at": "2026-09-16"
     }
   ]
 }
