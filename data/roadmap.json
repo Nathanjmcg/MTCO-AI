@@ -115,6 +115,34 @@
         }
       ],
       "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-kensite-technicals-technical-help-triage-knowledge-hub",
+      "company": "kensite",
+      "name": "Kensite Technicals - Technical Help Triage & Knowledge Hub",
+      "stage": "Proposed",
+      "category": "Workshop and Yard",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Provides an email and WhatsApp channel for technical help where initial repair requests are triaged with ac...",
+      "scope": "Provides an email and WhatsApp channel for technical help where initial repair requests are triaged with access to all equipment manuals to avoid unnecessary call outs. If a call out is unavoidable, a repair is logged. Also helps our own teams by importing all job sheets with the fixes made, building a knowledge sharing database that builds on the common fixes datasheet that Mitch started.",
+      "how": "A triage system reads incoming technical help requests via email and WhatsApp, cross-references equipment manuals and imported job sheet history to suggest common fixes, and only escalates to a call out when no match is found. Every completed job sheet is imported to grow a searchable knowledge base of fixes, building on the common fixes datasheet Mitch started.",
+      "who": [
+        {
+          "who": "Workshop and Yard team",
+          "how": "fewer unnecessary call outs and access to shared fix knowledge"
+        },
+        {
+          "who": "Customers",
+          "how": "faster technical issue resolution"
+        },
+        {
+          "who": "Operations team",
+          "how": "logged repairs and trend data from job sheet imports"
+        }
+      ],
+      "proposed_at": "2026-09-16"
     }
   ]
 }
