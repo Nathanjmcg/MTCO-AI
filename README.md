@@ -9,7 +9,9 @@ Nathanjmcg/mtco-ai.
 - `dashboard.html` - the dashboard itself (logos, fonts and runtime inlined). Holds no project data.
 - `data/roadmap.json` - the companies shown, the category list and every project. Ken appends proposals to the copy in the repo.
 - `requirements.txt` - Streamlit only.
+- `planner/` - the What's Next planner, a two way Streamlit component. `frontend/index.html` shows the board and the planner; `__init__.py` wires it to Python.
 - `Publish App To GitHub.py` - pushes the files above to the repo. Run it after any change.
+- `Publish App.cmd`, `Push Roadmap Data.cmd`, `Pull Roadmap Data.cmd` - double click versions of the same thing.
 
 ## Making a change live
 1. Edit the file(s) in this folder.
@@ -37,3 +39,20 @@ it as Proposed and confirms with a link to the app.
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+## What's Next planner
+The button under the stage bracket opens a planner: every Proposed idea across the
+group, dragged into Now, Next or Later to form the AI Manager's queue. Saving writes
+a `plan` object into `data/roadmap.json` in the repo and nothing else, so a proposal
+Ken filed a second earlier can never be lost by someone saving an arrangement.
+
+Saving needs a GitHub token with contents write access to this repo, stored in the
+app's Streamlit Cloud secrets as `github_token`:
+
+    Streamlit Cloud > this app > Settings > Secrets
+    github_token = "ghp_..."
+
+Without it the planner still opens, read only, and says so on screen. Note the app is
+public, so with the token in place anyone who has the link can rearrange the plan.
+Every save is a commit, so the history in GitHub is the audit trail and any change can
+be reverted.
