@@ -3,7 +3,8 @@
   "active": [
     "mtco",
     "kensite",
-    "aes"
+    "aes",
+    "eventus"
   ],
   "categories": [
     "Operations",
@@ -142,6 +143,524 @@
           "how": "logged repairs and trend data from job sheet imports"
         }
       ],
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-ken-operations-agent",
+      "company": "kensite",
+      "name": "Ken, AI operations agent",
+      "stage": "Shipped",
+      "category": "Operations",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Aug 2026",
+      "summary": "Answers staff by email, checks MCS and Big Change, sends paperwork and creates quotes.",
+      "scope": "Ken is Kensite's AI colleague on email. Staff ask him in plain English and he looks things up in MCS (contracts, what is on hire, rates, quotes, purchase orders, invoices), fetches proof of delivery photographs from Big Change, attaches hire contracts, quote and invoice copies, drafts and creates quotes in MCS, searches and reads the document library, keeps the IMS register moving and logs what he cannot yet do on his own wishlist.",
+      "how": "A Pydantic AI agent polling his own mailbox every ten seconds. Each email is triaged, then answered by a model equipped with a fixed toolbox of Python functions that talk to MCS RM-web, Big Change, Graph and the SharePoint library. Anything that writes or sends pauses for the requester's approval unless they explicitly asked. Trusted staff get the full toolbox; named outside guests get a separate agent holding only the tools they are granted. He deploys his own new versions and keeps a status file and audit trail.",
+      "who": [
+        {
+          "who": "Hire desk and operations",
+          "how": "Contract, hire and paperwork questions answered in minutes without opening MCS"
+        },
+        {
+          "who": "Transport and yard",
+          "how": "Proof of delivery photographs and movement checks on request"
+        },
+        {
+          "who": "Finance",
+          "how": "Invoice copies, purchase order lookups and Big Change invoice consolidation"
+        },
+        {
+          "who": "Management",
+          "how": "One place to see what the AI estate is doing, and a wishlist of what it should do next"
+        }
+      ],
+      "dates": {
+        "Shipped": "Aug 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-daily-deliveries-and-collections",
+      "company": "kensite",
+      "name": "Daily delivery and collection notices",
+      "stage": "Shipped",
+      "category": "Transport and Logistics",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Jul 2026",
+      "summary": "Each evening the next day's movements go to the yard and haulage, checked against the prep schedule.",
+      "scope": "Every evening at 16:30 the following day's deliveries and collections are pulled from MCS, the assets on each are listed and grouped by contract, checked against the prep schedule, and emailed to the yard and transport team so the day is planned before anyone arrives.",
+      "how": "A scheduled Python worker on Ken's machine runs the MCS delivery search and collections report, applies the yard's own rules (fleet sales and service only contracts skipped, fleet numbers shown where allocated), compares against the prep schedule on GitHub and sends from Ken's mailbox through Graph.",
+      "who": [
+        {
+          "who": "Yard team",
+          "how": "The next day's loading list ready first thing, without anyone compiling it"
+        },
+        {
+          "who": "Transport",
+          "how": "Collections and deliveries in one list, matched to the prep schedule"
+        },
+        {
+          "who": "Hire desk",
+          "how": "Discrepancies between MCS and the prep schedule surfaced the evening before"
+        }
+      ],
+      "dates": {
+        "Shipped": "Jul 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-prep-schedule-app",
+      "company": "kensite",
+      "name": "Prep Schedule app",
+      "stage": "Shipped",
+      "category": "Workshop and Yard",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Jul 2026",
+      "summary": "A live web app for the yard's prep schedule, with request queues that workers pick up.",
+      "scope": "The yard's prep schedule as a Streamlit web app instead of a spreadsheet: on hires, off hires and site moves by day, units, haulage and notes, editable from any device. It also carries request queues for quotes, copy invoices, live hire reports and materials, which automations pick up within minutes.",
+      "how": "Streamlit Community Cloud app deployed from GitHub with its data in JSON files in the same repo, written through the GitHub contents API. Automations on Ken's machine poll the queue files and act on them; the MCS discrepancy check reconciles the schedule against MCS every ten minutes.",
+      "who": [
+        {
+          "who": "Yard team",
+          "how": "One schedule everyone sees, kept in step with MCS"
+        },
+        {
+          "who": "Hire desk",
+          "how": "Requests for quotes, invoices and reports raised in the app and fulfilled automatically"
+        },
+        {
+          "who": "Management",
+          "how": "A single view of the week's movements"
+        }
+      ],
+      "dates": {
+        "Shipped": "Jul 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-prep-schedule-mcs-discrepancy-check",
+      "company": "kensite",
+      "name": "Prep schedule and MCS discrepancy check",
+      "stage": "Shipped",
+      "category": "Operations",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Jul 2026",
+      "summary": "Every ten minutes the prep schedule is reconciled against MCS and gaps are flagged or fixed.",
+      "scope": "Compares what is booked in MCS (deliveries, collections and split deliveries) with what is on the prep schedule, auto adds movements the schedule is missing and emails a discrepancy list for anything that does not match.",
+      "how": "A scheduled worker runs the MCS delivery search and collections report, URL decodes split contract references, matches each MCS movement to at most one prep entry, writes safe additions back to the schedule's JSON on GitHub and emails the rest from Ken's mailbox.",
+      "who": [
+        {
+          "who": "Yard team",
+          "how": "No movement arrives that the schedule did not know about"
+        },
+        {
+          "who": "Hire desk",
+          "how": "Booking errors caught within ten minutes rather than on the day"
+        }
+      ],
+      "dates": {
+        "Shipped": "Jul 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-live-hire-report-worker",
+      "company": "kensite",
+      "name": "Live hire report on request",
+      "stage": "Shipped",
+      "category": "Hire Desk and Sales",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Jul 2026",
+      "summary": "Ask for a customer's live hire report in the app and the PDF and Excel arrive by email.",
+      "scope": "Anyone can request a customer live hire report from the prep schedule app. The worker matches the customer to their MCS account, runs the report in both formats and emails the branded PDF and a clean Excel to the requester.",
+      "how": "Polls the request queue every seven minutes, fuzzy matches the customer name to MCS accounts, runs user report 59 for the PDF and report 61 for the data, rebuilds the Excel in the agreed column format and sends from Ken's mailbox.",
+      "who": [
+        {
+          "who": "Hire desk",
+          "how": "Live hire reports for customers in minutes without touching MCS"
+        },
+        {
+          "who": "Account managers",
+          "how": "Consistent branded reports to send on"
+        }
+      ],
+      "dates": {
+        "Shipped": "Jul 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-copy-invoice-worker",
+      "company": "kensite",
+      "name": "Copy invoices on request",
+      "stage": "Shipped",
+      "category": "Finance",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Aug 2026",
+      "summary": "Request copy invoices in the app and one email arrives with every PDF attached.",
+      "scope": "The hire desk queues copy invoice requests in the prep schedule app; the worker pulls each invoice PDF from MCS and sends one email per request with every invoice attached.",
+      "how": "Polls the queue every five minutes, fetches each invoice through the MCS report endpoint using the Shared Toolbox's document unwrapper, and emails from Ken's mailbox through Graph.",
+      "who": [
+        {
+          "who": "Finance and credit control",
+          "how": "Copy invoices out to customers the same hour they are asked for"
+        },
+        {
+          "who": "Hire desk",
+          "how": "No more digging invoices out of MCS one by one"
+        }
+      ],
+      "dates": {
+        "Shipped": "Aug 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-materials-po-worker",
+      "company": "kensite",
+      "name": "Materials purchase orders",
+      "stage": "Shipped",
+      "category": "Finance",
+      "owner": "Chris Murdoch",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Aug 2026",
+      "summary": "Materials requests are matched to supplier catalogues and invoice history and raised as purchase orders for review.",
+      "scope": "Materials requested from the prep schedule app are matched to the Danfast catalogue and to what Kensite has actually bought before, priced, and routed into a purchase order in Zahara with the evidence shown beside each line so the approver can overrule it.",
+      "how": "A scheduled worker reads the materials queue, scores each line against the supplier portal crawl and the invoice history (invoice evidence wins where it is clearly better), builds the order through the Zahara API and emails the approver from Ken's mailbox.",
+      "who": [
+        {
+          "who": "Purchasing",
+          "how": "Orders drafted in minutes with the reasoning visible"
+        },
+        {
+          "who": "Yard team",
+          "how": "Materials requested from the same app as everything else"
+        },
+        {
+          "who": "Finance",
+          "how": "Cleaner purchase order data and fewer mismatched invoices"
+        }
+      ],
+      "dates": {
+        "Shipped": "Aug 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-quote-trends",
+      "company": "kensite",
+      "name": "Quote trends workbook",
+      "stage": "Shipped",
+      "category": "Hire Desk and Sales",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Jul 2026",
+      "summary": "A branded Excel of the last three months of quotes: what, who, how much and conversion.",
+      "scope": "Pulls every quote raised in the last three months from MCS and writes a Kensite branded workbook: headline numbers, monthly trend and conversion, unit types quoted, top customers and quotes by salesperson, with the raw quotes behind it.",
+      "how": "Runs the MCS Quote Analysis report plus each quote's detail page over HTTP, then builds charted sheets with openpyxl. Read only; nothing is written back.",
+      "who": [
+        {
+          "who": "Sales",
+          "how": "See what is being quoted and to whom without a manual export"
+        },
+        {
+          "who": "Management",
+          "how": "Conversion and pipeline trend on demand"
+        }
+      ],
+      "dates": {
+        "Shipped": "Jul 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-weekly-check-up",
+      "company": "kensite",
+      "name": "Weekly check up pack",
+      "stage": "Shipped",
+      "category": "IT and Data",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Aug 2026",
+      "summary": "The Monday meeting's figures built automatically every week from MCS.",
+      "scope": "Builds the weekly check up for the Monday meeting: run rate, units on hire, yield, the week's on and off hire movement and projections, from seven MCS reports, and sends it as a pack.",
+      "how": "A scheduled builder pulls seven MCS user reports through the Shared Toolbox, applies Nathan's definitions of hire figure and yield, renders the pack and emails it from Ken's mailbox at 14:00 each week, with an offline test suite behind it.",
+      "who": [
+        {
+          "who": "Management",
+          "how": "The Monday numbers ready without a morning of spreadsheet work"
+        },
+        {
+          "who": "Finance",
+          "how": "Consistent definitions week to week"
+        }
+      ],
+      "dates": {
+        "Shipped": "Aug 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-ims-register-reminders",
+      "company": "kensite",
+      "name": "IMS register review reminders",
+      "stage": "Shipped",
+      "category": "HSEQ and Compliance",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Jul 2026",
+      "summary": "Owners are reminded of the documents, certificates and assessments they have due for review.",
+      "scope": "Reads the Master IMS Register, finds every document, certificate, assessment or process overdue for review or expiring soon, and emails each owner a reminder listing only their items, every morning.",
+      "how": "A scheduled read only worker opens the register workbook from the synced library, groups items by owner and sends from Ken's mailbox through Graph at 09:35 daily. Ken can also read the register and plan closures when asked.",
+      "who": [
+        {
+          "who": "Document owners",
+          "how": "A short personal list rather than a 400 row register"
+        },
+        {
+          "who": "HSEQ",
+          "how": "Reviews kept current ahead of ISO audits"
+        }
+      ],
+      "dates": {
+        "Shipped": "Jul 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-rams-and-lift-plans",
+      "company": "kensite",
+      "name": "RAMS and lift plan generation",
+      "stage": "Shipped",
+      "category": "HSEQ and Compliance",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Aug 2026",
+      "summary": "A customer's risk assessment or a job's details become a fully branded Kensite RAMS pack in minutes.",
+      "scope": "Turns an uploaded risk assessment, or a customer, site and job brief, into a complete Kensite RAMS or generic lift plan pack in house style: risk assessment, method statement and lift diagram appendices.",
+      "how": "Claude skills encoding the Kensite templates, wording and brand rules produce the Word documents from the source material, with the author checking before issue.",
+      "who": [
+        {
+          "who": "HSEQ",
+          "how": "Consistent, complete RAMS packs without starting from a blank template"
+        },
+        {
+          "who": "Hire desk",
+          "how": "Delivery RAMS for a new customer turned round the same day"
+        },
+        {
+          "who": "Transport",
+          "how": "Lift plans issued before the crane arrives"
+        }
+      ],
+      "dates": {
+        "Shipped": "Aug 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-site-builder",
+      "company": "kensite",
+      "name": "Site Builder compound drawings",
+      "stage": "Shipped",
+      "category": "Hire Desk and Sales",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Aug 2026",
+      "summary": "Customers lay out their own compound online and get a branded Kensite drawing back automatically.",
+      "scope": "A public web app where a customer drags Kensite units onto a site plan. Each saved layout becomes a branded Kensite PDF drawing automatically, Ken issues the drawing reference and emails it, and a bill of quantities can be read straight off the drawing for quoting.",
+      "how": "Streamlit app on GitHub; a watcher on Ken's machine turns new or re saved drawings into PDFs, files every issued version by reference and reports circulation. Ken picks up requests every three minutes, issues references and keeps the app awake overnight.",
+      "who": [
+        {
+          "who": "Sales",
+          "how": "A drawing and quantities from the customer's own hand, ready to quote"
+        },
+        {
+          "who": "Customers",
+          "how": "See their compound before they order"
+        },
+        {
+          "who": "Transport",
+          "how": "Drawings that match what actually goes on the lorry"
+        }
+      ],
+      "dates": {
+        "Shipped": "Aug 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-infotime-weekly-clocking",
+      "company": "kensite",
+      "name": "Weekly clocking report",
+      "stage": "Shipped",
+      "category": "People and HR",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Jul 2026",
+      "summary": "The week's clockings from InfoTime become a branded timesheet workbook every Monday.",
+      "scope": "Logs into the InfoTime clock system each Monday, collects the previous Saturday to Friday period for every current employee and saves a Kensite branded Excel workbook to the shared Yard Timesheets folder.",
+      "how": "A scheduled scraper walks the timesheet pages (the system's own export is broken), builds the workbook with openpyxl and files it, with a failure email if anything stops it.",
+      "who": [
+        {
+          "who": "Payroll and HR",
+          "how": "Timesheets ready first thing Monday, every week"
+        },
+        {
+          "who": "Yard supervisors",
+          "how": "One consistent workbook to check against"
+        }
+      ],
+      "dates": {
+        "Shipped": "Jul 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-mcs-contact-enrichment",
+      "company": "kensite",
+      "name": "MCS contact clean up",
+      "stage": "Shipped",
+      "category": "Hire Desk and Sales",
+      "owner": "Nick Arnold",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Aug 2026",
+      "summary": "Finds missing emails and phone numbers for MCS contacts from the enquiries mailbox, for approval.",
+      "scope": "Audits MCS customer contacts for missing email addresses and phone numbers, then searches the enquiries mailbox for them and writes a proposals spreadsheet a person approves before anything is entered.",
+      "how": "Two read only scripts: an audit of MCS contacts, and an Outlook scan that matches names to addresses and numbers. Nothing is written to MCS or the mailbox.",
+      "who": [
+        {
+          "who": "Hire desk",
+          "how": "Contact records that can actually be used to send quotes and invoices"
+        },
+        {
+          "who": "Sales",
+          "how": "Fewer bounced emails and unreachable customers"
+        }
+      ],
+      "dates": {
+        "Shipped": "Aug 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-big-change-reconciliation",
+      "company": "kensite",
+      "name": "Big Change haulage cost reconciliation",
+      "stage": "Shipped",
+      "category": "Finance",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Ainscough Haulage invoices on Big Change matched to the MCS contracts and orders they belong to.",
+      "scope": "Reconciles haulage job costs invoiced through Big Change against MCS: each invoice is matched to its purchase order and contract, priced against MCS's own order, categorised, and the unmatched remainder reported with the reason, so haulage cost sits on the right job.",
+      "how": "A worker Ken loads on request runs the Big Change financial documents report and MCS reports 60 and 63, matches on the exact purchase order number with typing variations forgiven and never on similarity, and produces the reconciliation workbook with notes on every row.",
+      "who": [
+        {
+          "who": "Finance",
+          "how": "Haulage cost allocated to the right contracts, with the exceptions explained"
+        },
+        {
+          "who": "Transport",
+          "how": "Visibility of what Ainscough Haulage has billed against each job"
+        }
+      ],
+      "dates": {
+        "Shipped": "Sep 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "aes-transport-capacity-watcher",
+      "company": "aes",
+      "name": "Transport capacity alerts",
+      "stage": "Shipped",
+      "category": "Transport and Logistics",
+      "owner": "Lee",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Jul 2026",
+      "summary": "The enquiries desk is told the moment a day in the AES transport planner fills up or frees up.",
+      "scope": "Watches the AES Transport Planner for days marked at capacity and emails the enquiries desk only when something changes: a day newly full, or a full day that now has space.",
+      "how": "Runs every twenty minutes, reads the planner's Google Sheet through a service account, fingerprints the state so unchanged runs send nothing, and emails from Ken's mailbox.",
+      "who": [
+        {
+          "who": "Enquiries desk",
+          "how": "Never promise a date the planner cannot take"
+        },
+        {
+          "who": "Transport planning",
+          "how": "Freed capacity resold the same day"
+        }
+      ],
+      "dates": {
+        "Shipped": "Jul 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "aes-big-change-invoice-consolidation",
+      "company": "aes",
+      "name": "Big Change invoice search and consolidation",
+      "stage": "Shipped",
+      "category": "Finance",
+      "owner": "Lee",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Ask Ken for AES invoices from Big Change and get them collated or consolidated into totals, with a spreadsheet.",
+      "scope": "AES staff email Ken to find, list, total or consolidate Big Change invoices by customer, order number, job type, month or site, and get a statement and a two sheet workbook back. Read only: nothing is raised or changed in Big Change.",
+      "how": "Ken's guest agent for named AES contacts holds only the Big Change invoice tools, which query the Big Change web services API and build the workbook. Guests never reach anything of Kensite's.",
+      "who": [
+        {
+          "who": "AES finance",
+          "how": "Consolidated invoice statements in minutes"
+        },
+        {
+          "who": "AES customers",
+          "how": "One clear statement instead of a pile of invoices"
+        }
+      ],
+      "dates": {
+        "Shipped": "Sep 2026"
+      },
+      "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "mtco-ai-roadmap-tracker",
+      "company": "mtco",
+      "name": "MTCO AI Roadmap tracker",
+      "stage": "Shipped",
+      "category": "IT and Data",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "This dashboard: every AI project across the group, by company and stage, kept current by Ken.",
+      "scope": "A group wide view of AI implementation, impact and planned rollout across MTCO's companies. Named staff email Ken an idea and he files it as Proposed under the right company and business function, asking for what it does, how it works and who it benefits when the email does not say; he can also move, edit and remove entries as projects progress.",
+      "how": "A Streamlit app deployed from GitHub that renders a self contained dashboard fed by data/roadmap.json in the same repo. Ken writes to that file through the GitHub contents API with the change history kept in git; a publish script in the Automations folder rolls out changes to the app itself.",
+      "who": [
+        {
+          "who": "Group board",
+          "how": "One honest picture of AI across the companies"
+        },
+        {
+          "who": "Company leads",
+          "how": "A place to put ideas and see them progress"
+        },
+        {
+          "who": "Nathan",
+          "how": "No hand maintenance of the tracker"
+        }
+      ],
+      "dates": {
+        "Shipped": "Sep 2026"
+      },
       "proposed_at": "2026-09-16"
     }
   ]
