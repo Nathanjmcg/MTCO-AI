@@ -67,6 +67,34 @@
         }
       ],
       "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "aes-ainscough-haulage-driver-tracking-agent",
+      "company": "aes",
+      "name": "Ainscough Haulage Driver Tracking Agent",
+      "stage": "Proposed",
+      "category": "Transport and Logistics",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Answer delivery tracking questions (\"where is the driver for today's WA4 delivery\") in natural language and...",
+      "scope": "Answer delivery tracking questions (\"where is the driver for today's WA4 delivery\") in natural language and provide a shareable live-tracking link so customers can see delivery progress in real time without calling the office. For deliveries due today, reports how far away the driver is.",
+      "how": "Queries Big Change for delivery jobs by customer and date, reads driver tracking data (if Big Change supports GPS tracking or integrates with a telematics platform). For in-progress deliveries it reports the driver's distance from site. If Big Change provides a tracking URL, the agent surfaces the shareable link that can be sent externally to customers. Could also send automated SMS/email tracking links at dispatch.",
+      "who": [
+        {
+          "who": "Customers",
+          "how": "self-serve tracking of deliveries without ringing the office"
+        },
+        {
+          "who": "Hire desk / transport team",
+          "how": "far fewer \"where's my driver\" calls"
+        },
+        {
+          "who": "Ainscough Haulage",
+          "how": "professional, transparent delivery experience"
+        }
+      ],
+      "proposed_at": "2026-09-16"
     }
   ]
 }
