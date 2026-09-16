@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden}
+  body{
+    font-family:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:#faf9f5; color:#1a1b1e; -webkit-font-smoothing:antialiased;
+  }
+  #root{position:relative;width:100%;height:100vh;overflow:hidden}
+
+  /* ── the board, exactly as it was ─────────────────────────────────────── */
+  #board{position:absolute;inset:0;border:0;width:100%;height:100%;display:block}
+
+  /* ── the What's Next button, sitting under the stage bracket ──────────── */
+  #whatsNext{
+    position:absolute; left:50%; top:calc(50% + 150px); transform:translateX(-50%);
+    display:inline-flex; align-items:center; gap:10px;
+    padding:11px 20px 11px 18px; border-radius:999px; border:1px solid #cfd3cf;
+    background:#fff; color:#1a1b1e; font:inherit; font-size:13.5px; font-weight:600;
+    cursor:pointer; box-shadow:0 6px 20px -10px rgba(16,26,20,.45);
+    transition:transform .16s, box-shadow .16s, border-color .16s;
+  }
+  #whatsNext:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 12px 28px -12px rgba(16,26,20,.5);border-color:#0d823b}
+  #whatsNext:focus-visible{outline:2px solid #0d823b;outline-offset:3px}
+  #whatsNext .arrow{width:16px;height:16px;flex:none;color:#0d823b}
+  #whatsNext .tally{
+    font-size:11.5px;font-weight:700;color:#0d823b;background:rgba(13,130,59,.10);
+    border-radius:999px;padding:2px 8px;flex:none
+  }
+
+  /* ── the planner ──────────────────────────────────────────────────────── */
+  #planner{
+    position:absolute;inset:0;background:#faf9f5;display:none;
+    flex-direction:column;animation:rise .22s cubic-bezier(.22,.9,.28,1) both
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .phead{
+    display:flex;align-items:flex-start;gap:20px;justify-content:space-between;
+    padding:26px 30px 16px;flex:none
+  }
+  .phead h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.02em}
+  .phead p{margin:4px 0 0;font-size:13px;color:#5c5e66;max-width:62ch}
+  .pacts{display:flex;align-items:center;gap:10px;flex:none}
+  .btn{
+    font:inherit;font-size:13px;font-weight:600;padding:9px 16px;border-radius:999px;
+    border:1px solid #cfd3cf;background:#fff;color:#1a1b1e;cursor:pointer;
+    transition:background .15s,border-color .15s,opacity .15s
+  }
+  .btn:hover{border-color:#8a8c94}
+  .btn:focus-visible{outline:2px solid #0d823b;outline-offset:2px}
+  .btn.primary{background:#0d823b;border-color:#0d823b;color:#fff}
+  .btn.primary:hover{background:#0a6630;border-color:#0a6630}
+  .btn[disabled]{opacity:.45;cursor:not-allowed}
+  .note{
+    margin:0 30px 14px;padding:10px 14px;border-radius:10px;font-size:12.5px;
+    background:#fff5e6;border:1px solid #f0d9ad;color:#6b4e12;flex:none
+  }
+  .note code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;background:rgba(0,0,0,.05);padding:1px 5px;border-radius:3px}
+
+  /* unplanned tray */
+  .tray{margin:0 30px 6px;flex:none}
+  .trayhead{display:flex;align-items:center;gap:12px;margin-bottom:9px}
+  .laneTag{
+    display:inline-flex;align-items:center;gap:14px;flex:none;padding:6px 14px;
+    border-radius:999px;font-size:11.5px;font-weight:700;letter-spacing:.09em
+  }
+  .rule{flex:1;height:1px;background:#e6e5e1;min-width:0}
+  .hint{font-size:11.5px;color:#a2a4ab;flex:none}
+  .traybody{
+    display:flex;flex-wrap:wrap;gap:10px;min-height:56px;padding:10px;border-radius:12px;
+    border:1px dashed #dadada;background:#fff;align-content:flex-start;max-height:150px;overflow-y:auto
+  }
+
+  /* the timeline */
+  .timeline{
+    flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;padding:12px 30px 8px
+  }
+  .lane{display:flex;flex-direction:column;gap:10px;min-height:0}
+  .lanebody{
+    flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:10px;
+    padding:10px;border-radius:12px;border:1px solid #e6e5e1;background:#fff;
+    transition:background .15s,border-color .15s
+  }
+  .lanebody.over{background:#f2faf5;border-color:#0d823b}
+  .traybody.over{background:#f2faf5;border-color:#0d823b}
+  .lanemeta{font-size:11.5px;color:#8a8c94;padding:0 2px;flex:none}
+  .axis{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+    padding:0 30px 20px;flex:none;align-items:center
+  }
+  .axis div{height:2px;border-radius:2px}
+
+  /* cards */
+  .card{
+    background:#fff;border:1px solid #e6e5e1;border-radius:10px;padding:10px 12px;
+    display:flex;flex-direction:column;gap:5px;cursor:grab;flex:none;
+    box-shadow:0 1px 0 rgba(16,26,20,.03); touch-action:none; user-select:none
+  }
+  .tray .card{width:236px}
+  .card:focus-visible{outline:2px solid #0d823b;outline-offset:2px}
+  .card .nm{font-size:13px;font-weight:700;line-height:1.25;text-wrap:pretty}
+  .card .mt{display:flex;align-items:center;gap:8px;font-size:11px;color:#8a8c94;flex-wrap:wrap}
+  .card .co{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+  .card .co i{width:7px;height:7px;border-radius:50%;flex:none;display:block}
+  .card.ghost{opacity:.28}
+  .card.flying{
+    position:fixed;z-index:999;pointer-events:none;cursor:grabbing;width:236px;
+    box-shadow:0 18px 36px -14px rgba(16,26,20,.45);transform:rotate(-1.5deg)
+  }
+  .readonly .card{cursor:default}
+  .empty{font-size:12px;color:#b0b2b8;text-align:center;padding:14px 8px}
+
+  #toast{
+    position:absolute;left:50%;bottom:26px;transform:translateX(-50%) translateY(8px);
+    background:#1a1b1e;color:#fff;font-size:12.5px;font-weight:600;padding:9px 16px;
+    border-radius:999px;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:50
+  }
+  #toast.show{opacity:1;transform:translateX(-50%)}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.001s !important;transition-duration:.001s !important}}
+</style>
+</head>
+<body>
+<div id="root">
+  <iframe id="board" title="MTCO AI Roadmap board"></iframe>
+
+  <button id="whatsNext" type="button">
+    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+    What's next?
+    <span class="tally" id="tally" hidden></span>
+  </button>
+
+  <div id="planner">
+    <div class="phead">
+      <div>
+        <h1>What's next</h1>
+        <p>Drag the proposed ideas into the order they get built. This is the AI Manager's queue, so what sits in Now is what gets worked on next.</p>
+      </div>
+      <div class="pacts">
+        <button class="btn" id="cancelBtn" type="button">Close</button>
+        <button class="btn primary" id="saveBtn" type="button">Save plan</button>
+      </div>
+    </div>
+    <div class="note" id="note" hidden></div>
+
+    <div class="tray">
+      <div class="trayhead">
+        <span class="laneTag" id="trayTag" style="background:oklch(0.93 0.07 25);border:1px solid oklch(0.78 0.14 25);color:#000">NOT PLACED <span id="trayCount">0</span></span>
+        <div class="rule"></div>
+        <span class="hint" id="dragHint">Drag a card into Now, Next or Later. Keyboard: focus a card and use the arrow keys.</span>
+      </div>
+      <div class="traybody" id="tray" data-lane="tray"></div>
+    </div>
+
+    <div class="timeline" id="timeline"></div>
+    <div class="axis" id="axis"></div>
+  </div>
+
+  <div id="toast"></div>
+</div>
+
+<script>
+/* ── Streamlit's component protocol, by hand. Only three messages matter. ── */
+function post(msg){ window.parent.postMessage(Object.assign({isStreamlitMessage:true}, msg), "*"); }
+const Streamlit = {
+  ready(){ post({type:"streamlit:componentReady", apiVersion:1}); },
+  height(h){ post({type:"streamlit:setFrameHeight", height:h}); },
+  value(v){ post({type:"streamlit:setComponentValue", value:v, dataType:"json"}); }
+};
+
+/* ── constants ────────────────────────────────────────────────────────────── */
+const LANES = [
+  {id:"now",   label:"NOW",   hue:150, meta:"In hand, being built"},
+  {id:"next",  label:"NEXT",  hue:95,  meta:"Starts once Now is clear"},
+  {id:"later", label:"LATER", hue:60,  meta:"Agreed, not yet scheduled"}
+];
+const COMPANY_HUE  = {mtco:255, eventus:30, kensite:150, aes:110, ats:60, thinkhire:210, fireflai:20};
+// the dashboard holds the display names; keep this in step with it
+const COMPANY_NAME = {mtco:"MTCO", eventus:"Eventus Group", kensite:"Kensite",
+                      aes:"Ainscough Environmental Services", ats:"Ainscough Training Services",
+                      thinkhire:"Thinkhire", fireflai:"FireFlai"};
+const $ = s => document.querySelector(s);
+const el = (t,c) => { const e=document.createElement(t); if(c) e.className=c; return e; };
+
+let STATE = {projects:{}, lanes:{now:[], next:[], later:[], tray:[]}, canSave:true, dirty:false};
+
+/* ── build ────────────────────────────────────────────────────────────────── */
+function laneTag(lane){
+  const t = el("span","laneTag");
+  t.style.background = `oklch(0.93 0.07 ${lane.hue})`;
+  t.style.border = `1px solid oklch(0.78 0.14 ${lane.hue})`;
+  t.style.color = "#000";
+  t.innerHTML = `${lane.label} <span data-count="${lane.id}">0</span>`;
+  return t;
+}
+
+function buildLanes(){
+  const tl = $("#timeline"); tl.innerHTML = "";
+  const ax = $("#axis"); ax.innerHTML = "";
+  LANES.forEach(lane => {
+    const wrap = el("div","lane");
+    const head = el("div","trayhead");
+    head.appendChild(laneTag(lane));
+    const rule = el("div","rule"); head.appendChild(rule);
+    wrap.appendChild(head);
+    const meta = el("div","lanemeta"); meta.textContent = lane.meta; wrap.appendChild(meta);
+    const body = el("div","lanebody"); body.id = "lane-" + lane.id; body.dataset.lane = lane.id;
+    wrap.appendChild(body);
+    tl.appendChild(wrap);
+    const bar = el("div"); bar.style.background = `oklch(0.78 0.14 ${lane.hue})`; ax.appendChild(bar);
+  });
+}
+
+function card(p){
+  const c = el("article","card");
+  c.dataset.id = p.id;
+  c.tabIndex = 0;
+  const hue = COMPANY_HUE[p.company] != null ? COMPANY_HUE[p.company] : 220;
+  c.innerHTML =
+    `<div class="nm"></div>
+     <div class="mt">
+       <span class="co"><i style="background:oklch(0.62 0.17 ${hue})"></i><span class="con"></span></span>
+       <span class="cat"></span>
+     </div>`;
+  c.querySelector(".nm").textContent = p.name;
+  c.querySelector(".con").textContent = p.companyName;
+  c.querySelector(".cat").textContent = p.category || "";
+  c.title = p.summary || p.name;
+  return c;
+}
+
+function renderCards(){
+  const holders = {tray: $("#tray")};
+  LANES.forEach(l => holders[l.id] = document.getElementById("lane-" + l.id));
+  Object.entries(holders).forEach(([id, box]) => {
+    box.innerHTML = "";
+    STATE.lanes[id].forEach(pid => {
+      const p = STATE.projects[pid];
+      if(p) box.appendChild(card(p));
+    });
+    if(!STATE.lanes[id].length && id !== "tray"){
+      const e = el("div","empty"); e.textContent = "Drop an idea here"; box.appendChild(e);
+    }
+    if(!STATE.lanes[id].length && id === "tray"){
+      const e = el("div","empty"); e.textContent = "Every proposed idea is placed"; box.appendChild(e);
+    }
+  });
+  updateCounts();
+}
+
+function updateCounts(){
+  $("#trayCount").textContent = STATE.lanes.tray.length;
+  LANES.forEach(l => {
+    const n = document.querySelector(`[data-count="${l.id}"]`);
+    if(n) n.textContent = STATE.lanes[l.id].length;
+  });
+  const queued = STATE.lanes.now.length + STATE.lanes.next.length + STATE.lanes.later.length;
+  const tally = $("#tally");
+  if(queued){ tally.hidden = false; tally.textContent = queued + " queued"; }
+  else tally.hidden = true;
+  $("#saveBtn").disabled = !STATE.canSave;
+}
+
+function readDom(){
+  const out = {tray:[], now:[], next:[], later:[]};
+  Object.keys(out).forEach(id => {
+    const box = id === "tray" ? $("#tray") : document.getElementById("lane-" + id);
+    out[id] = [...box.querySelectorAll(".card")].map(c => c.dataset.id);
+  });
+  STATE.lanes = out;
+  updateCounts();
+}
+
+/* ── pointer drag: works with a mouse and with a finger ───────────────────── */
+let drag = null;
+
+function boxes(){
+  return [$("#tray"), ...LANES.map(l => document.getElementById("lane-" + l.id))];
+}
+
+function onDown(ev){
+  if(!STATE.canSave) return;
+  const c = ev.target.closest(".card");
+  if(!c || ev.button === 1 || ev.button === 2) return;
+  const r = c.getBoundingClientRect();
+  drag = {card:c, startX:ev.clientX, startY:ev.clientY, dx:ev.clientX - r.left, dy:ev.clientY - r.top,
+          w:r.width, started:false, pointerId:ev.pointerId};
+  c.setPointerCapture(ev.pointerId);
+}
+
+function startDrag(){
+  const c = drag.card;
+  drag.clone = c.cloneNode(true);
+  drag.clone.classList.add("flying");
+  drag.clone.style.width = drag.w + "px";
+  document.body.appendChild(drag.clone);
+  c.classList.add("ghost");
+  drag.started = true;
+  document.body.style.cursor = "grabbing";
+}
+
+function onMove(ev){
+  if(!drag) return;
+  if(!drag.started){
+    if(Math.abs(ev.clientX - drag.startX) + Math.abs(ev.clientY - drag.startY) < 5) return;
+    startDrag();
+  }
+  ev.preventDefault();
+  drag.clone.style.left = (ev.clientX - drag.dx) + "px";
+  drag.clone.style.top  = (ev.clientY - drag.dy) + "px";
+
+  let target = null;
+  for(const b of boxes()){
+    const r = b.getBoundingClientRect();
+    if(ev.clientX >= r.left && ev.clientX <= r.right && ev.clientY >= r.top && ev.clientY <= r.bottom){ target = b; break; }
+  }
+  boxes().forEach(b => b.classList.toggle("over", b === target));
+  if(!target) return;
+
+  const horizontal = target.dataset.lane === "tray";
+  const siblings = [...target.querySelectorAll(".card")].filter(c => c !== drag.card);
+  let before = null;
+  for(const s of siblings){
+    const r = s.getBoundingClientRect();
+    const mid = horizontal ? r.left + r.width/2 : r.top + r.height/2;
+    const pos = horizontal ? ev.clientX : ev.clientY;
+    if(pos < mid){ before = s; break; }
+  }
+  const emptyMsg = target.querySelector(".empty");
+  if(emptyMsg) emptyMsg.remove();
+  target.insertBefore(drag.card, before);
+}
+
+function endDrag(){
+  if(!drag) return;
+  if(drag.started){
+    drag.clone.remove();
+    drag.card.classList.remove("ghost");
+    document.body.style.cursor = "";
+    boxes().forEach(b => b.classList.remove("over"));
+    readDom();
+    renderCards();
+    STATE.dirty = true;
+  }
+  drag = null;
+}
+
+/* ── keyboard: arrows move a card between lanes and within one ────────────── */
+const ORDER = ["tray", "now", "next", "later"];
+function onKey(ev){
+  if(!STATE.canSave) return;
+  const c = ev.target.closest(".card");
+  if(!c) return;
+  const id = c.dataset.id;
+  const from = ORDER.find(k => STATE.lanes[k].includes(id));
+  if(!from) return;
+  let moved = false;
+  const i = STATE.lanes[from].indexOf(id);
+  if(ev.key === "ArrowRight" || ev.key === "ArrowLeft"){
+    const to = ORDER[ORDER.indexOf(from) + (ev.key === "ArrowRight" ? 1 : -1)];
+    if(to){ STATE.lanes[from].splice(i,1); STATE.lanes[to].push(id); moved = true; }
+  } else if(ev.key === "ArrowUp" && i > 0){
+    STATE.lanes[from].splice(i,1); STATE.lanes[from].splice(i-1,0,id); moved = true;
+  } else if(ev.key === "ArrowDown" && i < STATE.lanes[from].length - 1){
+    STATE.lanes[from].splice(i,1); STATE.lanes[from].splice(i+1,0,id); moved = true;
+  }
+  if(moved){
+    ev.preventDefault();
+    STATE.dirty = true;
+    renderCards();
+    const again = document.querySelector(`.card[data-id="${CSS.escape(id)}"]`);
+    if(again) again.focus();
+  }
+}
+
+/* ── open, close, save ────────────────────────────────────────────────────── */
+function openPlanner(){
+  $("#planner").style.display = "flex";
+  $("#board").style.visibility = "hidden";
+  $("#whatsNext").style.display = "none";
+  try{ sessionStorage.setItem("mtco.planner.open", "1"); }catch(e){}
+}
+function closePlanner(){
+  $("#planner").style.display = "none";
+  $("#board").style.visibility = "";
+  $("#whatsNext").style.display = "";
+  try{ sessionStorage.removeItem("mtco.planner.open"); }catch(e){}
+}
+function toast(text){
+  const t = $("#toast"); t.textContent = text; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+$("#whatsNext").addEventListener("click", openPlanner);
+$("#cancelBtn").addEventListener("click", () => {
+  if(STATE.dirty && !confirm("Close without saving? The arrangement you made will be lost.")) return;
+  closePlanner();
+});
+$("#saveBtn").addEventListener("click", () => {
+  if(!STATE.canSave) return;
+  try{ sessionStorage.setItem("mtco.planner.saving", "1"); }catch(e){}
+  STATE.dirty = false;
+  Streamlit.value({lanes:{now:STATE.lanes.now, next:STATE.lanes.next, later:STATE.lanes.later},
+                   nonce: Date.now()});
+});
+
+document.addEventListener("pointerdown", onDown);
+document.addEventListener("pointermove", onMove, {passive:false});
+document.addEventListener("pointerup", endDrag);
+document.addEventListener("pointercancel", endDrag);
+document.addEventListener("keydown", onKey);
+
+/* ── render from Streamlit ────────────────────────────────────────────────── */
+let built = false;
+function render(args){
+  if(!built){ buildLanes(); built = true; }
+
+  const board = $("#board");
+  if(args.dashboard_html && board.srcdoc !== args.dashboard_html) board.srcdoc = args.dashboard_html;
+
+  const roadmap = args.roadmap || {};
+  const names = {};
+  Object.assign(names, COMPANY_NAME);
+  (roadmap.companies || []).forEach(c => names[c.id] = c.name);
+  const proposed = (roadmap.projects || []).filter(p => p.stage === "Proposed");
+  STATE.projects = {};
+  proposed.forEach(p => {
+    STATE.projects[p.id] = {id:p.id, name:p.name, company:p.company,
+                            companyName: names[p.company] || p.company,
+                            category:p.category, summary:p.summary};
+  });
+
+  const saved = (args.plan && args.plan.lanes) || {};
+  const placed = new Set();
+  const lanes = {now:[], next:[], later:[], tray:[]};
+  ["now","next","later"].forEach(k => {
+    (saved[k] || []).forEach(id => {
+      if(STATE.projects[id] && !placed.has(id)){ lanes[k].push(id); placed.add(id); }
+    });
+  });
+  proposed.forEach(p => { if(!placed.has(p.id)) lanes.tray.push(p.id); });
+  STATE.lanes = lanes;
+  STATE.canSave = !!args.can_save;
+  STATE.dirty = false;
+
+  document.getElementById("planner").classList.toggle("readonly", !STATE.canSave);
+  const note = $("#note");
+  if(!STATE.canSave){
+    note.hidden = false;
+    note.innerHTML = "Live saving is not switched on yet, so this is a read only view. " +
+      "To enable it, add a GitHub token with write access to this repo as <code>github_token</code> " +
+      "in the app's Streamlit Cloud secrets.";
+    $("#dragHint").textContent = "Read only until live saving is switched on.";
+  } else {
+    note.hidden = true;
+    $("#dragHint").textContent = "Drag a card into Now, Next or Later. Keyboard: focus a card and use the arrow keys.";
+  }
+
+  renderCards();
+  Streamlit.height(args.height || 900);
+
+  let wasSaving = false, wasOpen = false;
+  try{
+    wasSaving = sessionStorage.getItem("mtco.planner.saving") === "1";
+    wasOpen = sessionStorage.getItem("mtco.planner.open") === "1";
+    if(wasSaving) sessionStorage.removeItem("mtco.planner.saving");
+  }catch(e){}
+  if(wasOpen) openPlanner();
+  if(wasSaving){
+    closePlanner();
+    toast(args.saved_at ? "Plan saved " + args.saved_at : "Plan saved");
+  }
+}
+
+window.addEventListener("message", ev => {
+  if(ev.data && ev.data.type === "streamlit:render") render(ev.data.args || {});
+});
+Streamlit.ready();
+</script>
+</body>
+</html>
