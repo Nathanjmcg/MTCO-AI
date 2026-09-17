@@ -661,6 +661,26 @@
         "Shipped": "Sep 2026"
       },
       "proposed_at": "2026-09-16"
+    },
+    {
+      "id": "kensite-esg-compliance-dashboard-for-site-setups",
+      "company": "kensite",
+      "name": "ESG & Compliance Dashboard for Site Setups",
+      "stage": "Proposed",
+      "category": "HSEQ and Compliance",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Generates a unified ESG and compliance report for each site compound, pulling together power insights from...",
+      "scope": "Generates a unified ESG and compliance report for each site compound, pulling together power insights from all providers into one clean Kensite Site Compound Report, plus a compliance dashboard covering legionella testing, water usage, electrical testing and other site compliance data.",
+      "how": "Ingests power usage and insight data from whatever power provider a site uses (renewable or traditional), normalises it alongside Kensite's own compliance test results (legionella testing, water usage, electrical testing, PAT testing), and presents everything as a branded dashboard or report per site compound setup.",
+      "who": [
+        {
+          "who": "Customers",
+          "how": "one clean ESG report instead of multiple from different providers. Kensite sales and hire desk: strengthens the value proposition and supports the goal of managing power supply for customers. HSEQ team: consolidated compliance tracking across all live sites."
+        }
+      ],
+      "proposed_at": "2026-09-17"
     }
   ]
 }
