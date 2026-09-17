@@ -681,6 +681,26 @@
         }
       ],
       "proposed_at": "2026-09-17"
+    },
+    {
+      "id": "kensite-off-hire-inbox-monitor-daily-summary",
+      "company": "kensite",
+      "name": "Off-Hire Inbox Monitor & Daily Summary",
+      "stage": "Proposed",
+      "category": "Operations",
+      "owner": "Nathan Mcguinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Monitors the enquiries inbox for emails about the off-hire and collection of kit, then produces a daily sum...",
+      "scope": "Monitors the enquiries inbox for emails about the off-hire and collection of kit, then produces a daily summary email to the team showing time received, customer, site, assumed contract number, whether it has been actioned, and whether it has been replied to (and by who). Helps the team track and better manage off-hires.",
+      "how": "Ken reads the enquiries inbox throughout the day, identifies emails related to off-hire and collection requests, extracts key details (timestamp, customer, site, contract reference), checks the current status in MCS and the prep schedule, and compiles a single end-of-day summary email for the whole team.",
+      "who": [
+        {
+          "who": "Operations and yard teams",
+          "how": "full visibility of off-hire requests coming in, whether anyone has picked them up, and what still needs actioning. Hire desk: one daily picture of outgoing collections rather than scattered inbox threads."
+        }
+      ],
+      "proposed_at": "2026-09-17"
     }
   ]
 }
