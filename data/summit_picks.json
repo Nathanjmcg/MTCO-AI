@@ -1,4 +1,22 @@
 {
  "_comment": "Who is going to what at AI Summit Barcelona 2026, written by the Summit widget on the dashboard and read by Ken every two minutes. One entry per first name: keys are programme session keys, saved_at is UTC.",
- "picks": {}
+ "picks": {
+  "Nathan": {
+   "keys": [
+    "Opening Session",
+    "Keynote 2",
+    "Keynote 4",
+    "Keynote 7",
+    "Demo 4",
+    "Demo 6",
+    "Keynote 16",
+    "Use Case 1",
+    "Demo 11",
+    "Demo 13",
+    "Demo 15"
+   ],
+   "saved_at": "2026-09-19T21:11:18Z",
+   "seq": 1
+  }
+ }
 }
