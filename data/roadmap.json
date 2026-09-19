@@ -750,7 +750,7 @@
       "id": "mtco-h-s-committee-agent",
       "company": "mtco",
       "name": "H&S Committee Agent",
-      "stage": "Proposed",
+      "stage": "Shipped",
       "category": "HSEQ and Compliance",
       "owner": "Nathan Mcguinness",
       "proposed_by": "nathan.mcguinness@kensite.co.uk",
@@ -764,7 +764,11 @@
           "how": "no manual chasing, filing or agenda preparation. Cross-group stakeholders at MTCO, Kensite and AES: consistent record-keeping across the group without anyone having to remember the admin."
         }
       ],
-      "proposed_at": "2026-09-19"
+      "proposed_at": "2026-09-19",
+      "dates": {
+        "Shipped": "Sep 2026"
+      },
+      "updated_at": "2026-09-19"
     }
   ]
 }
