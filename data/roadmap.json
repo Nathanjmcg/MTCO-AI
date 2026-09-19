@@ -745,6 +745,26 @@
         }
       ],
       "proposed_at": "2026-09-19"
+    },
+    {
+      "id": "mtco-h-s-committee-agent",
+      "company": "mtco",
+      "name": "H&S Committee Agent",
+      "stage": "Proposed",
+      "category": "HSEQ and Compliance",
+      "owner": "Nathan Mcguinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Fully automates the H&S committee administration cycle: Ken generates, calendarises and distributes agendas...",
+      "scope": "Fully automates the H&S committee administration cycle: Ken generates, calendarises and distributes agendas, files minutes and supporting documents, chases outstanding actions, and prompts committee members for agenda items. Future WisprFlow integration will pull minutes directly from meeting recordings.",
+      "how": "Ken generates the agenda using the H&S committee agenda tool, files the agenda and minutes into the document library, chases outstanding actions a week before the next meeting, and prompts Mitch Garnett and other committee members for agenda items. A planned WisprFlow MCP integration will pull transcribed minutes from the Meeting Room Mic directly into the document library.",
+      "who": [
+        {
+          "who": "HSEQ team and committee members",
+          "how": "no manual chasing, filing or agenda preparation. Cross-group stakeholders at MTCO, Kensite and AES: consistent record-keeping across the group without anyone having to remember the admin."
+        }
+      ],
+      "proposed_at": "2026-09-19"
     }
   ]
 }
