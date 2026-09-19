@@ -120,7 +120,7 @@
 
   /* ── the AI Summit widget: a floating button, and the picker it opens ── */
   #summitBtn{
-    position:absolute; right:22px; bottom:22px; display:none; align-items:center; gap:10px;
+    position:absolute; right:22px; top:16px; display:none; align-items:center; gap:10px;
     padding:12px 18px 12px 14px; border-radius:999px; border:1px solid #0d823b;
     background:#0d823b; color:#fff; font:inherit; font-size:13.5px; font-weight:700;
     cursor:pointer; box-shadow:0 10px 26px -10px rgba(13,130,59,.7); z-index:40;
@@ -131,13 +131,13 @@
   #summitBtn svg{width:18px;height:18px;flex:none}
   #summitBtn .sub{font-size:11px;font-weight:600;opacity:.85;display:block;margin-top:1px}
   #summit{
-    position:absolute; inset:0; display:none; align-items:center; justify-content:center;
+    position:absolute; inset:0; display:none; align-items:flex-start; justify-content:center;
     background:rgba(20,24,22,.42); z-index:60; padding:18px
   }
   #summit.show{display:flex}
   #summit.show ~ #summitBtn, #root:has(#summit.show) #summitBtn{display:none !important}
   .sdlg{
-    width:min(880px,100%); max-height:100%; background:#faf9f5; border-radius:16px;
+    width:min(880px,100%); max-height:min(100%, 720px); background:#faf9f5; border-radius:16px;
     box-shadow:0 30px 80px -30px rgba(0,0,0,.6); display:flex; flex-direction:column;
     overflow:hidden; animation:rise .22s cubic-bezier(.22,.9,.28,1) both
   }
