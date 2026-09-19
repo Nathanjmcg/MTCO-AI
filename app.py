@@ -1,6 +1,14 @@
 """
 MTCO AI Roadmap
-Version 2.0
+Version 2.1
+
+2.1: the AI Summit picker. A floating button on the dashboard opens a picker:
+your name, the day, tick the sessions, Save. The save is written to
+data/summit_picks.json in this repo with the same token the plan uses, and
+Ken (Kensite's agent) reads that file every two minutes, emails the person
+their diary entries and books the follow ups after each session. The
+programme it shows is data/summit_programme.json. Nothing about the
+dashboard or the What's Next plan changes.
 
 Streamlit entry point. The company and project records live in
 data/roadmap.json (Ken appends proposals there); this file injects that JSON
@@ -32,6 +40,8 @@ REPO = "Nathanjmcg/mtco-ai"
 BRANCH = "main"
 DATA_PATH = "data/roadmap.json"
 API = f"https://api.github.com/repos/{REPO}/contents/{DATA_PATH}"
+SUMMIT_PROGRAMME = "data/summit_programme.json"
+SUMMIT_PICKS = "data/summit_picks.json"
 FALLBACK = {"active": ["mtco", "kensite", "aes"], "categories": [], "projects": []}
 
 st.set_page_config(page_title="MTCO AI Project Dashboard", layout="wide",
@@ -89,6 +99,52 @@ def load_remote(tok):
         return None, None
 
 
+def load_json(tok, path):
+    """Any JSON file in the repo, live copy first, deployed copy second.
+    Returns (data, sha); sha is None when the repo copy could not be read."""
+    if tok:
+        try:
+            r = requests.get(f"https://api.github.com/repos/{REPO}/contents/{path}",
+                             headers=headers(tok), params={"ref": BRANCH}, timeout=15)
+            if r.status_code == 200:
+                body = r.json()
+                return json.loads(base64.b64decode(body["content"]).decode()), body["sha"]
+        except Exception:  # noqa: BLE001
+            pass
+    try:
+        return json.loads((HERE / path).read_text(encoding="utf-8")), None
+    except Exception:  # noqa: BLE001
+        return None, None
+
+
+def save_summit_picks(tok, name, keys):
+    """Write ONE person's picks. The file is re-read first and everyone else's
+    entry is carried over untouched, so two people saving a minute apart
+    cannot lose each other's sessions. saved_at is what Ken watches."""
+    current, sha = load_json(tok, SUMMIT_PICKS)
+    if sha is None:
+        return False, "the picks file could not be read back, so nothing was written"
+    if not isinstance(current, dict):
+        current = {}
+    picks = current.setdefault("picks", {})
+    prev = picks.get(name) or {}
+    picks[name] = {"keys": [str(k) for k in keys],
+                   "saved_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                   "seq": int(prev.get("seq") or 0) + 1}
+    body = (json.dumps(current, indent=1, ensure_ascii=False) + "\n").encode("utf-8")
+    payload = {"message": f"AI Summit: {name} saved {len(keys)} session(s) from the dashboard",
+               "content": base64.b64encode(body).decode(), "branch": BRANCH, "sha": sha}
+    try:
+        w = requests.put(f"https://api.github.com/repos/{REPO}/contents/{SUMMIT_PICKS}",
+                         headers=headers(tok), json=payload, timeout=30)
+        if w.status_code in (409, 422):
+            return False, "someone else saved at the same moment, so nothing was written; try again"
+        w.raise_for_status()
+    except Exception as e:  # noqa: BLE001
+        return False, f"the write failed ({type(e).__name__})"
+    return True, ""
+
+
 def save_plan(tok, lanes):
     """Write ONLY the plan back. The file is re-read first and every other key
     is carried over untouched, so a proposal Ken filed a second ago cannot be
@@ -122,6 +178,13 @@ if remote is None and tok:
 plan = roadmap.get("plan") or {"lanes": {"now": [], "next": [], "later": []}}
 saved_at = st.session_state.get("saved_at", "")
 
+# the AI Summit picker: the programme and everyone's saved picks. Shown only
+# while there is a programme to show; the button disappears with the file.
+summit_prog, _ = load_json(tok, SUMMIT_PROGRAMME)
+summit_picks, _ = load_json(tok, SUMMIT_PICKS)
+summit = ({"programme": summit_prog, "picks": (summit_picks or {}).get("picks", {})}
+          if summit_prog else None)
+
 html = (HERE / "dashboard.html").read_text(encoding="utf-8")
 
 
@@ -137,11 +200,26 @@ def encode_for_template(obj):
 board = html.replace(PLACEHOLDER, encode_for_template(roadmap))
 
 result = planner(dashboard_html=board, roadmap=roadmap, plan=plan,
-                 can_save=bool(tok), saved_at=saved_at, height=900, key="board")
+                 can_save=bool(tok), saved_at=saved_at, height=900, key="board",
+                 summit=summit, summit_saved_at=st.session_state.get("summit_saved_at", ""))
 
 if result and result.get("nonce") and result["nonce"] != st.session_state.get("nonce"):
     st.session_state["nonce"] = result["nonce"]
-    if tok:
+    if not tok:
+        pass
+    elif result.get("kind") == "summit":
+        name = str(result.get("name") or "").strip()
+        allowed = set((summit_prog or {}).get("attendees") or [])
+        if name not in allowed:
+            st.error("That name is not on the attendee list, so nothing was saved.")
+        else:
+            ok, why = save_summit_picks(tok, name, result.get("keys") or [])
+            if ok:
+                st.session_state["summit_saved_at"] = datetime.now(timezone.utc).strftime("%H:%M UTC")
+                st.rerun()
+            else:
+                st.error(f"Your sessions were not saved: {why}.")
+    else:
         ok, why = save_plan(tok, result.get("lanes") or {})
         if ok:
             st.session_state["saved_at"] = datetime.now(timezone.utc).strftime("%H:%M UTC")
