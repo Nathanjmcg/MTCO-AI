@@ -706,7 +706,7 @@
       "id": "kensite-sla-request-agent",
       "company": "kensite",
       "name": "SLA Request Agent",
-      "stage": "Proposed",
+      "stage": "Testing",
       "category": "Hire Desk and Sales",
       "owner": "Nathan McGuinness",
       "proposed_by": "nathan.mcguinness@kensite.co.uk",
@@ -720,7 +720,11 @@
           "how": "faster customer onboarding, consistent framework documents without manual assembly, rates pulled from known schedules so less risk of keying errors."
         }
       ],
-      "proposed_at": "2026-09-19"
+      "proposed_at": "2026-09-19",
+      "dates": {
+        "Testing": "Sep 2026"
+      },
+      "updated_at": "2026-09-19"
     }
   ]
 }
