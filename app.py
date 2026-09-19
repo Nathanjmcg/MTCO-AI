@@ -1,6 +1,13 @@
 """
 MTCO AI Roadmap
-Version 2.1
+Version 2.2
+
+2.2: the board comes up whatever order the files land in. The publisher pushes
+one commit per file and Streamlit Cloud redeployed between app.py and the
+component, so for a few minutes the app ran new code against the old
+component and showed a TypeError instead of the dashboard. That call is now
+guarded: if the component does not take the summit arguments yet, the board
+is rendered without the picker and the picker appears on the next redeploy.
 
 2.1: the AI Summit picker. A floating button on the dashboard opens a picker:
 your name, the day, tick the sessions, Save. The save is written to
@@ -199,9 +206,17 @@ def encode_for_template(obj):
 
 board = html.replace(PLACEHOLDER, encode_for_template(roadmap))
 
-result = planner(dashboard_html=board, roadmap=roadmap, plan=plan,
-                 can_save=bool(tok), saved_at=saved_at, height=900, key="board",
-                 summit=summit, summit_saved_at=st.session_state.get("summit_saved_at", ""))
+try:
+    result = planner(dashboard_html=board, roadmap=roadmap, plan=plan,
+                     can_save=bool(tok), saved_at=saved_at, height=900, key="board",
+                     summit=summit, summit_saved_at=st.session_state.get("summit_saved_at", ""))
+except TypeError:
+    # 2.1.1: the files are pushed one commit apiece and Streamlit Cloud can
+    # redeploy between them, so this file can briefly run against a component
+    # that does not know the summit yet. The board must still come up; the
+    # picker appears on the next redeploy.
+    result = planner(dashboard_html=board, roadmap=roadmap, plan=plan,
+                     can_save=bool(tok), saved_at=saved_at, height=900, key="board")
 
 if result and result.get("nonce") and result["nonce"] != st.session_state.get("nonce"):
     st.session_state["nonce"] = result["nonce"]
