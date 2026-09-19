@@ -1,6 +1,11 @@
 """
 MTCO AI Roadmap planner component
-Version 1.0
+Version 1.1
+
+1.1: the AI Summit picker rides in the same component. summit carries the
+programme and everyone's saved picks in; a save comes back as
+{"kind": "summit", "name": ..., "keys": [...], "nonce": n}, and the What's
+Next plan now says {"kind": "plan", ...} so the app can tell them apart.
 
 A two way Streamlit component. It shows the dashboard exactly as it is (in a
 nested frame, untouched), adds the What's Next button, and returns the plan
@@ -16,9 +21,12 @@ _FRONTEND = Path(__file__).parent / "frontend"
 _component = components.declare_component("mtco_planner", path=str(_FRONTEND))
 
 
-def planner(dashboard_html, roadmap, plan, can_save, saved_at="", height=900, key=None):
-    """Render the board. Returns None until someone saves, then the plan dict
-    {"lanes": {"now": [id, ...], "next": [...], "later": [...]}, "nonce": n}."""
+def planner(dashboard_html, roadmap, plan, can_save, saved_at="", height=900, key=None,
+            summit=None, summit_saved_at=""):
+    """Render the board. Returns None until someone saves, then either the plan
+    {"kind": "plan", "lanes": {"now": [...], "next": [...], "later": [...]}, "nonce": n}
+    or a summit pick {"kind": "summit", "name": ..., "keys": [...], "nonce": n}."""
     return _component(dashboard_html=dashboard_html, roadmap=roadmap, plan=plan,
                       can_save=bool(can_save), saved_at=saved_at, height=height,
+                      summit=summit, summit_saved_at=summit_saved_at,
                       key=key, default=None)
