@@ -118,6 +118,74 @@
   .readonly .card{cursor:default}
   .empty{font-size:12px;color:#b0b2b8;text-align:center;padding:14px 8px}
 
+  /* ── the AI Summit widget: a floating button, and the picker it opens ── */
+  #summitBtn{
+    position:absolute; right:22px; bottom:22px; display:none; align-items:center; gap:10px;
+    padding:12px 18px 12px 14px; border-radius:999px; border:1px solid #0d823b;
+    background:#0d823b; color:#fff; font:inherit; font-size:13.5px; font-weight:700;
+    cursor:pointer; box-shadow:0 10px 26px -10px rgba(13,130,59,.7); z-index:40;
+    transition:transform .16s, box-shadow .16s
+  }
+  #summitBtn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(13,130,59,.8)}
+  #summitBtn:focus-visible{outline:2px solid #0d823b;outline-offset:3px}
+  #summitBtn svg{width:18px;height:18px;flex:none}
+  #summitBtn .sub{font-size:11px;font-weight:600;opacity:.85;display:block;margin-top:1px}
+  #summit{
+    position:absolute; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(20,24,22,.42); z-index:60; padding:18px
+  }
+  #summit.show{display:flex}
+  #summit.show ~ #summitBtn, #root:has(#summit.show) #summitBtn{display:none !important}
+  .sdlg{
+    width:min(880px,100%); max-height:100%; background:#faf9f5; border-radius:16px;
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.6); display:flex; flex-direction:column;
+    overflow:hidden; animation:rise .22s cubic-bezier(.22,.9,.28,1) both
+  }
+  .shead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 26px 14px;flex:none}
+  .shead h1{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em}
+  .shead p{margin:4px 0 0;font-size:12.5px;color:#5c5e66}
+  .sclose{font:inherit;border:0;background:transparent;font-size:22px;line-height:1;color:#8a8c94;cursor:pointer;padding:4px 8px;border-radius:8px}
+  .sclose:hover{background:#eeede8;color:#1a1b1e}
+  .sstep{padding:0 26px 12px;flex:none}
+  .slabel{font-size:11.5px;font-weight:700;letter-spacing:.09em;color:#8a8c94;margin:0 0 8px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{
+    font:inherit;font-size:13px;font-weight:600;padding:9px 16px;border-radius:999px;
+    border:1px solid #cfd3cf;background:#fff;color:#1a1b1e;cursor:pointer;transition:all .15s
+  }
+  .pill:hover{border-color:#0d823b}
+  .pill.on{background:#0d823b;border-color:#0d823b;color:#fff}
+  .pill .n{font-size:11px;font-weight:700;margin-left:6px;opacity:.75}
+  .slist{flex:1;min-height:120px;overflow-y:auto;padding:4px 26px 12px;display:none}
+  .slist.show{display:block}
+  .slot{
+    position:sticky;top:0;background:#faf9f5;padding:12px 0 6px;font-size:11.5px;font-weight:800;
+    letter-spacing:.08em;color:#0d823b;z-index:1
+  }
+  .sess{
+    display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid #e6e5e1;
+    border-radius:10px;background:#fff;margin-bottom:7px;cursor:pointer;transition:border-color .15s,background .15s
+  }
+  .sess:hover{border-color:#8a8c94}
+  .sess.on{border-color:#0d823b;background:#f2faf5;box-shadow:inset 3px 0 0 #0d823b}
+  .sess.clash{border-color:#c9822e}
+  .sess input{margin:3px 0 0;width:18px;height:18px;flex:none;accent-color:#0d823b;cursor:pointer}
+  .sess .t{font-size:13.5px;font-weight:700;line-height:1.3}
+  .sess .m{font-size:11.5px;color:#6b6e76;margin-top:3px}
+  .sess .m b{color:#1a1b1e;font-weight:700}
+  .sess .d{font-size:12px;color:#53565e;margin-top:6px;display:none}
+  .sess.open .d{display:block}
+  .sess .more{font-size:11.5px;color:#0d823b;text-decoration:underline;cursor:pointer;margin-top:4px;display:inline-block}
+  .sess .warn{font-size:11.5px;color:#9a5a12;margin-top:4px;font-weight:600}
+  .sfoot{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 26px 20px;
+    border-top:1px solid #e6e5e1;flex:none;background:#faf9f5
+  }
+  .stally{font-size:13px;color:#5c5e66}
+  .stally b{color:#0d823b;font-size:15px}
+  .sacts{display:flex;gap:10px}
+  .sempty{font-size:13px;color:#8a8c94;padding:40px 0;text-align:center}
+
   #toast{
     position:absolute;left:50%;bottom:26px;transform:translateX(-50%) translateY(8px);
     background:#1a1b1e;color:#fff;font-size:12.5px;font-weight:600;padding:9px 16px;
@@ -161,6 +229,39 @@
 
     <div class="timeline" id="timeline"></div>
     <div class="axis" id="axis"></div>
+  </div>
+
+  <button id="summitBtn" type="button" aria-haspopup="dialog">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path><path d="M8.5 15.5l2.2 2.2 4.8-4.8"></path></svg>
+    <span><span id="summitBtnTitle">AI Summit Barcelona</span><span class="sub" id="summitBtnSub">Pick your sessions</span></span>
+  </button>
+
+  <div id="summit" role="dialog" aria-modal="true" aria-labelledby="summitH1">
+    <div class="sdlg">
+      <div class="shead">
+        <div>
+          <h1 id="summitH1">AI Summit Barcelona</h1>
+          <p id="summitSub">Pick your name, then a day, then tick the sessions you are going to. Save, and Ken emails your diary entries within a couple of minutes.</p>
+        </div>
+        <button class="sclose" id="summitClose" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="sstep">
+        <p class="slabel">WHO ARE YOU?</p>
+        <div class="pills" id="whoPills"></div>
+      </div>
+      <div class="sstep" id="dayStep" hidden>
+        <p class="slabel">WHICH DAY?</p>
+        <div class="pills" id="dayPills"></div>
+      </div>
+      <div class="slist" id="sessList"></div>
+      <div class="sfoot">
+        <div class="stally" id="stally">Pick your name to start.</div>
+        <div class="sacts">
+          <button class="btn" id="summitCancel" type="button">Close</button>
+          <button class="btn primary" id="summitSave" type="button" disabled>Save my sessions</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="toast"></div>
@@ -385,12 +486,14 @@ function openPlanner(){
   $("#planner").style.display = "flex";
   $("#board").style.visibility = "hidden";
   $("#whatsNext").style.display = "none";
+  $("#summitBtn").style.visibility = "hidden";
   try{ sessionStorage.setItem("mtco.planner.open", "1"); }catch(e){}
 }
 function closePlanner(){
   $("#planner").style.display = "none";
   $("#board").style.visibility = "";
   $("#whatsNext").style.display = "";
+  $("#summitBtn").style.visibility = "";
   try{ sessionStorage.removeItem("mtco.planner.open"); }catch(e){}
 }
 function toast(text){
@@ -407,7 +510,7 @@ $("#saveBtn").addEventListener("click", () => {
   if(!STATE.canSave) return;
   try{ sessionStorage.setItem("mtco.planner.saving", "1"); }catch(e){}
   STATE.dirty = false;
-  Streamlit.value({lanes:{now:STATE.lanes.now, next:STATE.lanes.next, later:STATE.lanes.later},
+  Streamlit.value({kind:"plan", lanes:{now:STATE.lanes.now, next:STATE.lanes.next, later:STATE.lanes.later},
                    nonce: Date.now()});
 });
 
@@ -416,6 +519,177 @@ document.addEventListener("pointermove", onMove, {passive:false});
 document.addEventListener("pointerup", endDrag);
 document.addEventListener("pointercancel", endDrag);
 document.addEventListener("keydown", onKey);
+
+/* ── the AI Summit picker ─────────────────────────────────────────────────── */
+// Nathan: "a floating widget in the MTCO tracker ... select their name, then the
+// day, then the sessions ... click Save and it submits somewhere Ken can
+// retrieve it." Save writes data/summit_picks.json through the app; Ken reads
+// it every two minutes, emails the diary entries and books the follow ups.
+const SUM = {on:false, prog:null, picks:{}, who:"", day:"", chosen:new Set(), saved:new Set(), dirty:false};
+
+function sumSlot(a,b){ return a.date===b.date && a.start<b.end && b.start<a.end; }
+
+function sumOpen(){
+  if(!SUM.prog) return;
+  $("#summit").classList.add("show");
+  try{ sessionStorage.setItem("mtco.summit.open","1"); }catch(e){}
+  sumRender();
+}
+function sumClose(){
+  if(SUM.dirty && !confirm("Close without saving? The sessions you ticked will not reach Ken.")) return;
+  $("#summit").classList.remove("show");
+  SUM.dirty = false;
+  try{ sessionStorage.removeItem("mtco.summit.open"); }catch(e){}
+}
+
+function sumPickWho(name){
+  if(SUM.who === name) return;
+  if(SUM.dirty && !confirm("Switch person without saving? The sessions you ticked will not reach Ken.")) return;
+  SUM.who = name;
+  SUM.saved = new Set(((SUM.picks[name]||{}).keys)||[]);
+  SUM.chosen = new Set(SUM.saved);
+  SUM.dirty = false;
+  if(!SUM.day) SUM.day = sumDays()[0] || "";
+  try{ sessionStorage.setItem("mtco.summit.who", name); }catch(e){}
+  sumRender();
+}
+function sumDays(){
+  const seen = [], got = {};
+  (SUM.prog.sessions||[]).forEach(s => { if(s.date && !got[s.date]){ got[s.date]=1; seen.push(s.date); } });
+  return seen.sort();
+}
+function sumDayLabel(date){
+  const s = (SUM.prog.sessions||[]).find(x => x.date===date);
+  return s ? (s.day + " " + parseInt(date.slice(-2),10)) : date;
+}
+
+function sumRender(){
+  const p = SUM.prog;
+  // who
+  const who = $("#whoPills"); who.innerHTML = "";
+  (p.attendees||[]).forEach(n => {
+    const b = el("button","pill" + (SUM.who===n ? " on":"")); b.type="button";
+    const cnt = ((SUM.picks[n]||{}).keys||[]).length;
+    b.innerHTML = `<span></span>${cnt ? `<span class="n">${cnt} saved</span>` : ""}`;
+    b.firstChild.textContent = n;
+    b.addEventListener("click", () => sumPickWho(n));
+    who.appendChild(b);
+  });
+  // day
+  const dayStep = $("#dayStep"); dayStep.hidden = !SUM.who;
+  const dp = $("#dayPills"); dp.innerHTML = "";
+  if(SUM.who){
+    sumDays().forEach(d => {
+      const b = el("button","pill" + (SUM.day===d ? " on":"")); b.type="button";
+      const cnt = [...SUM.chosen].filter(k => (p.sessions.find(s=>s.key===k)||{}).date===d).length;
+      b.innerHTML = `<span></span>${cnt ? `<span class="n">${cnt} ticked</span>` : ""}`;
+      b.firstChild.textContent = sumDayLabel(d);
+      b.addEventListener("click", () => { SUM.day = d; sumRender(); });
+      dp.appendChild(b);
+    });
+  }
+  // sessions
+  const list = $("#sessList"); list.innerHTML = "";
+  list.classList.toggle("show", !!(SUM.who && SUM.day));
+  if(SUM.who && SUM.day){
+    const chosenSess = p.sessions.filter(s => SUM.chosen.has(s.key));
+    const todays = p.sessions.filter(s => s.date===SUM.day).sort((a,b) => (a.start+a.stage).localeCompare(b.start+b.stage));
+    let last = "";
+    if(!todays.length){ const e = el("div","sempty"); e.textContent = "Nothing on this day."; list.appendChild(e); }
+    todays.forEach(s => {
+      if(s.start !== last){ const h = el("div","slot"); h.textContent = s.start; list.appendChild(h); last = s.start; }
+      const on = SUM.chosen.has(s.key);
+      const clashes = on ? chosenSess.filter(o => o.key!==s.key && sumSlot(o,s)) : [];
+      const row = el("label","sess" + (on?" on":"") + (clashes.length?" clash":""));
+      row.innerHTML =
+        `<input type="checkbox"${on?" checked":""}>
+         <div style="flex:1;min-width:0">
+           <div class="t"></div>
+           <div class="m"><b></b> &middot; <span class="st"></span><span class="tr"></span><span class="sp"></span></div>
+           ${clashes.length ? `<div class="warn">Clashes with ${clashes.map(c=>c.key).join(", ")}. You can only be at one.</div>` : ""}
+           ${s.brief ? `<span class="more">What it covers</span><div class="d"></div>` : ""}
+         </div>`;
+      row.querySelector(".t").textContent = s.title;
+      row.querySelector(".m b").textContent = s.start + " to " + s.end;
+      row.querySelector(".st").textContent = s.stage + (s.format ? " · " + s.format : "");
+      row.querySelector(".tr").textContent = s.track ? " · " + s.track : "";
+      row.querySelector(".sp").textContent = s.speakers ? " · " + s.speakers : "";
+      if(s.brief) row.querySelector(".d").textContent = s.brief;
+      row.querySelector("input").addEventListener("change", ev => {
+        if(ev.target.checked) SUM.chosen.add(s.key); else SUM.chosen.delete(s.key);
+        SUM.dirty = true; sumRender();
+      });
+      const more = row.querySelector(".more");
+      if(more) more.addEventListener("click", ev => { ev.preventDefault(); ev.stopPropagation(); row.classList.toggle("open"); });
+      list.appendChild(row);
+    });
+  }
+  // tally and save
+  const t = $("#stally");
+  if(!SUM.who) t.textContent = "Pick your name to start.";
+  else {
+    const byDay = {};
+    p.sessions.filter(s => SUM.chosen.has(s.key)).forEach(s => { byDay[s.day] = (byDay[s.day]||0)+1; });
+    const bits = Object.keys(byDay).map(d => `${d.slice(0,3)} ${byDay[d]}`).join(", ");
+    t.innerHTML = `<b>${SUM.chosen.size}</b> session${SUM.chosen.size===1?"":"s"} ticked${bits ? " (" + bits + ")" : ""}` +
+                  (SUM.dirty ? " &middot; not saved yet" : (SUM.saved.size ? " &middot; saved" : ""));
+  }
+  const same = SUM.chosen.size===SUM.saved.size && [...SUM.chosen].every(k => SUM.saved.has(k));
+  $("#summitSave").disabled = !SUM.on || !SUM.who || same;
+}
+
+function sumSave(){
+  if(!SUM.on || !SUM.who) return;
+  try{ sessionStorage.setItem("mtco.summit.saving", SUM.who); sessionStorage.removeItem("mtco.summit.open"); }catch(e){}
+  SUM.dirty = false;
+  $("#summitSave").disabled = true;
+  $("#stally").textContent = "Saving…";
+  Streamlit.value({kind:"summit", name:SUM.who, keys:[...SUM.chosen], nonce:Date.now()});
+}
+
+$("#summitBtn").addEventListener("click", sumOpen);
+$("#summitClose").addEventListener("click", sumClose);
+$("#summitCancel").addEventListener("click", sumClose);
+$("#summitSave").addEventListener("click", sumSave);
+$("#summit").addEventListener("click", ev => { if(ev.target.id==="summit") sumClose(); });
+document.addEventListener("keydown", ev => { if(ev.key==="Escape" && $("#summit").classList.contains("show")) sumClose(); });
+
+function sumRenderArgs(args){
+  const sm = args.summit;
+  const btn = $("#summitBtn");
+  if(!sm || !sm.programme || !(sm.programme.sessions||[]).length){ btn.style.display = "none"; SUM.prog = null; return; }
+  SUM.prog = sm.programme;
+  SUM.picks = (sm.picks && sm.picks.picks) || sm.picks || {};
+  SUM.on = !!args.can_save;
+  btn.style.display = "inline-flex";
+  $("#summitBtnTitle").textContent = sm.programme.event || "AI Summit";
+  const total = Object.values(SUM.picks).reduce((n,v) => n + ((v&&v.keys)||[]).length, 0);
+  $("#summitBtnSub").textContent = total ? `${total} session${total===1?"":"s"} picked so far` : "Pick your sessions";
+  $("#summitSub").textContent = SUM.on
+    ? "Pick your name, then a day, then tick the sessions you are going to. Save, and Ken emails your diary entries within a couple of minutes."
+    : "Read only: live saving is not switched on for this app yet.";
+  let who = "", saving = "", wasOpen = false;
+  try{
+    who = sessionStorage.getItem("mtco.summit.who") || "";
+    saving = sessionStorage.getItem("mtco.summit.saving") || "";
+    wasOpen = sessionStorage.getItem("mtco.summit.open") === "1";
+    if(saving) sessionStorage.removeItem("mtco.summit.saving");
+  }catch(e){}
+  if(who && (SUM.prog.attendees||[]).includes(who)){
+    SUM.who = who;
+    SUM.saved = new Set(((SUM.picks[who]||{}).keys)||[]);
+    SUM.chosen = new Set(SUM.saved);
+  }
+  if(saving){
+    $("#summit").classList.remove("show");
+    toast(args.summit_saved_at
+      ? `Saved for ${saving} at ${args.summit_saved_at}. Ken will email the diary entries shortly.`
+      : `Saved for ${saving}. Ken will email the diary entries shortly.`);
+  } else if(wasOpen){
+    $("#summit").classList.add("show");
+  }
+  if($("#summit").classList.contains("show")) sumRender();
+}
 
 /* ── render from Streamlit ────────────────────────────────────────────────── */
 let built = false;
@@ -464,6 +738,7 @@ function render(args){
   }
 
   renderCards();
+  sumRenderArgs(args);
   Streamlit.height(args.height || 900);
 
   let wasSaving = false, wasOpen = false;
