@@ -701,6 +701,26 @@
         }
       ],
       "proposed_at": "2026-09-17"
+    },
+    {
+      "id": "kensite-sla-request-agent",
+      "company": "kensite",
+      "name": "SLA Request Agent",
+      "stage": "Proposed",
+      "category": "Hire Desk and Sales",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Automatically produces branded Service and Commercial Framework documents for customers on request, populat...",
+      "scope": "Automatically produces branded Service and Commercial Framework documents for customers on request, populated with their agreed hire rates, service charges, transport prices, dates and commercial terms, so no manual document assembly is needed.",
+      "how": "When a Kensite colleague asks for a Service and Commercial Framework (SLA), Ken checks the required fields, takes the weekly hire rates, servicing charges and transport prices from known customer pricing schedules (e.g. the AE Yates rate card), and renders a fully branded PDF using the Kensite SLA template, which is then attached to the reply.",
+      "who": [
+        {
+          "who": "Sales and management team",
+          "how": "faster customer onboarding, consistent framework documents without manual assembly, rates pulled from known schedules so less risk of keying errors."
+        }
+      ],
+      "proposed_at": "2026-09-19"
     }
   ]
 }
