@@ -725,6 +725,26 @@
         "Testing": "Sep 2026"
       },
       "updated_at": "2026-09-19"
+    },
+    {
+      "id": "aes-sla-agreement-agent",
+      "company": "aes",
+      "name": "SLA / Agreement Agent",
+      "stage": "Proposed",
+      "category": "Operations",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Automatically produces branded service level agreements and framework documents for AES customers on reques...",
+      "scope": "Automatically produces branded service level agreements and framework documents for AES customers on request, populated with their agreed rates and commercial terms, so no manual document assembly is needed.",
+      "how": "When an AES colleague requests an SLA or service agreement, Ken checks the required fields, populates the agreed rates and terms from known customer schedules, and renders a fully branded PDF agreement document attached to the reply.",
+      "who": [
+        {
+          "who": "AES operations and sales team",
+          "how": "faster customer onboarding, consistent framework documents without manual assembly, reduced risk of keying errors on rates and terms."
+        }
+      ],
+      "proposed_at": "2026-09-19"
     }
   ]
 }
