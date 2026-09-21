@@ -769,6 +769,26 @@
         "Shipped": "Sep 2026"
       },
       "updated_at": "2026-09-19"
+    },
+    {
+      "id": "kensite-diary-from-email-forward-to-calendar-agent",
+      "company": "kensite",
+      "name": "Diary-from-Email - Forward-to-Calendar Agent",
+      "stage": "Proposed",
+      "category": "People and HR",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Takes any forwarded email or booking confirmation and returns a .ics calendar file, so the recipient never...",
+      "scope": "Takes any forwarded email or booking confirmation and returns a .ics calendar file, so the recipient never has to manually type event details into their diary. Eliminates the common errors of mistyping dates or times.",
+      "how": "Forward a booking confirmation or email with event details to Ken. Ken reads the forwarded email, uses natural language understanding to extract the event name, date, time, location and any notes, then generates a standard .ics calendar file and emails it back attached. Open the file and the event goes straight into your Outlook calendar, with no manual entry.",
+      "who": [
+        {
+          "who": "Chloe and everyone at Kensite who hates manual diary entry",
+          "how": "no more copy-pasting dates, no more getting the time wrong. Particularly useful for booking confirmations, meeting invites from non-Outlook senders, and event registrations."
+        }
+      ],
+      "proposed_at": "2026-09-21"
     }
   ],
   "plan": {
