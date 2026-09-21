@@ -774,7 +774,7 @@
       "id": "kensite-diary-from-email-forward-to-calendar-agent",
       "company": "kensite",
       "name": "Diary-from-Email - Forward-to-Calendar Agent",
-      "stage": "Proposed",
+      "stage": "Testing",
       "category": "People and HR",
       "owner": "Chloe Ainscough",
       "proposed_by": "chloe.ainscough@kensite.co.uk",
@@ -788,7 +788,11 @@
           "how": "no more copy-pasting dates, no more getting the time wrong. Particularly useful for booking confirmations, meeting invites from non-Outlook senders, and event registrations."
         }
       ],
-      "proposed_at": "2026-09-21"
+      "proposed_at": "2026-09-21",
+      "dates": {
+        "Testing": "Sep 2026"
+      },
+      "updated_at": "2026-09-21"
     }
   ],
   "plan": {
