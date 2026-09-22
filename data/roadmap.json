@@ -913,6 +913,26 @@
         "Testing": "Sep 2026"
       },
       "updated_at": "2026-09-22"
+    },
+    {
+      "id": "aes-business-esg-reporting-for-aes-fleet",
+      "company": "aes",
+      "name": "Business ESG Reporting for AES Fleet",
+      "stage": "Proposed",
+      "category": "HSEQ and Compliance",
+      "owner": "Lee",
+      "proposed_by": "lee@ainscoughenviro.co.uk",
+      "date": "Sep 2026",
+      "summary": "Moves ESG reporting beyond transport-only transport ESG to business-level ESG, producing draft ESG reports...",
+      "scope": "Moves ESG reporting beyond transport-only transport ESG to business-level ESG, producing draft ESG reports for AES. It is built to work around fuzzy details such as incorrect registrations and incorrect mileage so those do not stop the reports being produced.",
+      "how": "Takes data from Radius, limited to AES vehicles only, plus telematics and vehicle information from Big Change, and drafts the ESG reports. Nathan advised that some tests will be implemented on planner to draft ESG reports in the planned projects.",
+      "who": [
+        {
+          "who": "AES",
+          "how": "draft ESG reports produced from the fleet data already held in Radius and Big Change, at business level rather than transport only."
+        }
+      ],
+      "proposed_at": "2026-09-22"
     }
   ],
   "plan": {
