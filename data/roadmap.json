@@ -817,6 +817,26 @@
         }
       ],
       "proposed_at": "2026-09-22"
+    },
+    {
+      "id": "mtco-idea-tournaments-best-value-prioritisation",
+      "company": "mtco",
+      "name": "Idea Tournaments - Best Value Prioritisation",
+      "stage": "Proposed",
+      "category": "IT and Data",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Runs structured idea tournaments where staff propose, score and compare ideas against the AI Roadmap's own...",
+      "scope": "Runs structured idea tournaments where staff propose, score and compare ideas against the AI Roadmap's own criteria (P&L lever, owner, metric, control boundary, 30-day proof), so the best-value projects are identified and prioritised transparently across the group.",
+      "how": "Each proposed idea (or existing Proposed items on the roadmap) enters a tournament bracket. Rounds compare two ideas head-to-head against the five roadmap questions: which P&L line moves, who owns the workflow, what metric proves it, what the control boundary is, and what proves it in 30 days. Staff vote or score each round, the winner advances, and after several rounds the highest-value ideas emerge ranked by collective judgement. Nathan and Chloe then schedule from the ranked list.",
+      "who": [
+        {
+          "who": "Nathan and Chloe",
+          "how": "a clear, data-backed prioritisation order without needing to weigh every idea manually. The whole group: transparent decision-making about what gets built next."
+        }
+      ],
+      "proposed_at": "2026-09-22"
     }
   ],
   "plan": {
