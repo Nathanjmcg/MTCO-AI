@@ -793,6 +793,30 @@
         "Testing": "Sep 2026"
       },
       "updated_at": "2026-09-21"
+    },
+    {
+      "id": "mtco-ai-systems-process-evaluation-group-wide-scoping-and-assessment",
+      "company": "mtco",
+      "name": "AI Systems & Process Evaluation - Group-Wide Scoping and Assessment",
+      "stage": "Proposed",
+      "category": "IT and Data",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Delivers a structured evaluation of existing systems and AI processes across the group, scoped before being...",
+      "scope": "Delivers a structured evaluation of existing systems and AI processes across the group, scoped before being planned, that answers where we are now, what works, what duplicates, and where the real gaps are before committing to the next build.",
+      "how": "Scopes the evaluation first (identify which systems, tools and AI processes exist across the group), then systematically reviews them against current business needs, producing a prioritised report that maps gaps, overlaps and opportunities for the next phase of AI development.",
+      "who": [
+        {
+          "who": "Nathan and the leadership team",
+          "how": "get a clear baseline to decide priorities"
+        },
+        {
+          "who": "all group companies",
+          "how": "ensures AI spend targets real gaps rather than building on top of existing duplication."
+        }
+      ],
+      "proposed_at": "2026-09-22"
     }
   ],
   "plan": {
