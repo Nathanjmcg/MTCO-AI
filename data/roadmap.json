@@ -881,6 +881,38 @@
         }
       ],
       "proposed_at": "2026-09-22"
+    },
+    {
+      "id": "kensite-rams-on-demand-agent",
+      "company": "kensite",
+      "name": "RAMS on Demand Agent",
+      "stage": "Testing",
+      "category": "HSEQ and Compliance",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Email Ken the job and he returns a fully branded Kensite RAMS as an editable Word document, scored and laid out to the house standard.",
+      "scope": "Any Kensite colleague can email Ken for a Risk Assessment and Method Statement. Ken checks he has the activity, location, client, hazards, method statement and people involved, asks for whatever is missing in one email, then produces the RAMS to the Kensite standard (RA48 layout, brand colours, PPE, emergency procedures, legislation and sign off) and attaches it to his reply. Prepared By and Approved By are left blank for signing.",
+      "how": "Two tools in Ken, behind the same staff only approval gate as the SLA agent. rams_requirements works out what is still missing; create_rams builds the document with python-docx from the details given. Ken enforces the Kensite scoring rule himself: residual severity always equals initial severity, controls reduce likelihood, and every score and rating is computed rather than copied. Where hazards or method are drafted from standard industry practice Ken says so and flags the document for review by a competent person before issue. Defaults he has used (PPE set, legislation, emergency drills, blank site contacts) are listed in the reply so the requester knows what to check.",
+      "who": [
+        {
+          "who": "HSEQ",
+          "how": "consistent RAMS in the house standard without starting from a blank template, with the scoring rule applied every time"
+        },
+        {
+          "who": "Hire desk and operations",
+          "how": "a delivery or siting RAMS for a customer turned round from one email"
+        },
+        {
+          "who": "Site supervisors",
+          "how": "a document ready to brief and sign, with what still needs confirming on site called out"
+        }
+      ],
+      "proposed_at": "2026-09-22",
+      "dates": {
+        "Testing": "Sep 2026"
+      },
+      "updated_at": "2026-09-22"
     }
   ],
   "plan": {
