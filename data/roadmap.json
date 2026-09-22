@@ -837,6 +837,26 @@
         }
       ],
       "proposed_at": "2026-09-22"
+    },
+    {
+      "id": "kensite-production-planning-agent",
+      "company": "kensite",
+      "name": "Production Planning Agent",
+      "stage": "Proposed",
+      "category": "Workshop and Yard",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Takes customer order requests and unit production timings and automatically generates a production schedule...",
+      "scope": "Takes customer order requests and unit production timings and automatically generates a production schedule that tells the yard team which units to work on and in what order, so the team knows what to prep and when it will be ready. Aims to replace some of the manual production scheduling work before an ops manager is recruited.",
+      "how": "Reads incoming unit orders and their required delivery dates from MCS, applies the known timing for each unit's production stages (prep, paint, test, load), and produces a daily or weekly production schedule for the yard team showing which units to work on, in what order, and when each will be ready for delivery.",
+      "who": [
+        {
+          "who": "Yard team",
+          "how": "clear priorities every shift, no guesswork about which unit to prep next. Hire desk and sales: realistic delivery dates they can quote based on actual yard capacity and production load."
+        }
+      ],
+      "proposed_at": "2026-09-22"
     }
   ],
   "plan": {
