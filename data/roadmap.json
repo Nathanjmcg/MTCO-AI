@@ -857,6 +857,30 @@
         }
       ],
       "proposed_at": "2026-09-22"
+    },
+    {
+      "id": "kensite-ai-organisational-tree-sub-agent-architecture",
+      "company": "kensite",
+      "name": "AI Organisational Tree - Sub-Agent Architecture",
+      "stage": "Proposed",
+      "category": "IT and Data",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Builds a structured hierarchy of specialised AI sub-agents working below Ken, each focused on a specific bu...",
+      "scope": "Builds a structured hierarchy of specialised AI sub-agents working below Ken, each focused on a specific business domain, so that complex multi-domain requests are handled by the right specialist agent while Ken retains overall coordination. A major project that needs proper scoping and planning.",
+      "how": "Using agentic AI patterns from Google Cloud, Ken would coordinate a structured tree of specialised sub-agents, each trained and equipped for a distinct business domain (transport, yard, compliance, finance, hire desk). Tasks are routed to the right sub-agent, and results are aggregated back through Ken for a unified response.",
+      "who": [
+        {
+          "who": "All Kensite teams get more specialised and responsive AI support in their domain",
+          "how": ""
+        },
+        {
+          "who": "Nathan and Chloe gain a scalable AI architecture that can extend across the wider MTCO group as the agentic tree grows",
+          "how": ""
+        }
+      ],
+      "proposed_at": "2026-09-22"
     }
   ],
   "plan": {
