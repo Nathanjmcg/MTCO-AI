@@ -933,6 +933,26 @@
         }
       ],
       "proposed_at": "2026-09-22"
+    },
+    {
+      "id": "kensite-ai-skills-development-plans-hybrid-builders",
+      "company": "kensite",
+      "name": "AI Skills Development Plans - Hybrid Builders",
+      "stage": "Proposed",
+      "category": "People and HR",
+      "owner": "Nathan Mcguinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Gives each person a personal development plan for AI skills at the human level, setting out the training, e...",
+      "scope": "Gives each person a personal development plan for AI skills at the human level, setting out the training, events and networking that build their capability. The output is a plan per person, so AI upskilling is planned and personal rather than a one-off course.",
+      "how": "Builds on the Hybrid Builders thinking from Mantu - Constance Nevoret's keynote at AI Summit Barcelona 2026 (Keynote 38, Wednesday 11:00, Auditorium Stage), on developing the people who turn AI into business value. Uses that input, plus training courses, events and networking opportunities, to build and keep up to date each person's AI development plan.",
+      "who": [
+        {
+          "who": "Kensite staff",
+          "how": "a clear, personal route to building AI skills, with training, events and networking in one place. Managers: a consistent way to plan, support and evidence AI capability across the team."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
