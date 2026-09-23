@@ -977,6 +977,26 @@
         "Scoped": "Sep 2026"
       },
       "updated_at": "2026-09-23"
+    },
+    {
+      "id": "kensite-voice-notes-as-a-data-collection-tool",
+      "company": "kensite",
+      "name": "Voice Notes as a Data Collection Tool",
+      "stage": "Proposed",
+      "category": "Hire Desk and Sales",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Uses voice notes as a data collection tool, for example a voice note to WhatsApp updating the CRM in real t...",
+      "scope": "Uses voice notes as a data collection tool, for example a voice note to WhatsApp updating the CRM in real time.",
+      "how": "A voice note sent to WhatsApp is captured and used to update the CRM in real time.",
+      "who": [
+        {
+          "who": "Hire desk and sales",
+          "how": "updates reach the CRM without typing them up."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
