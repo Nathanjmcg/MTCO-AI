@@ -1021,6 +1021,30 @@
         }
       ],
       "proposed_at": "2026-09-23"
+    },
+    {
+      "id": "kensite-churn-signals-from-sales-activity",
+      "company": "kensite",
+      "name": "Churn Signals from Sales Activity",
+      "stage": "Proposed",
+      "category": "Hire Desk and Sales",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Flags customers at risk of churn from sales signals such as a reduction in quote volumes, and can be extend...",
+      "scope": "Flags customers at risk of churn from sales signals such as a reduction in quote volumes, and can be extended to credit control issues such as a customer stopping paying bills on time.",
+      "how": "Monitors sales signals including quote volumes (and, extended, payment behaviour) and indicates where churn or credit control risk is rising.",
+      "who": [
+        {
+          "who": "Hire desk and sales",
+          "how": "early warning on accounts going quiet"
+        },
+        {
+          "who": "Finance",
+          "how": "earlier sight of late payment."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
