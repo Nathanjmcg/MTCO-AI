@@ -958,7 +958,7 @@
       "id": "kensite-kensite-openrouter-account-and-shared-api-keys",
       "company": "kensite",
       "name": "Kensite OpenRouter Account and Shared API Keys",
-      "stage": "Proposed",
+      "stage": "Scoped",
       "category": "IT and Data",
       "owner": "Nathan Mcguinness",
       "proposed_by": "nathan.mcguinness@kensite.co.uk",
@@ -972,7 +972,11 @@
           "how": "personal agents for daily efficiencies and assistance, plus a low-friction way to try new models. Kensite: one funded, controlled account with keys that can be scoped per person."
         }
       ],
-      "proposed_at": "2026-09-23"
+      "proposed_at": "2026-09-23",
+      "dates": {
+        "Scoped": "Sep 2026"
+      },
+      "updated_at": "2026-09-23"
     }
   ],
   "plan": {
