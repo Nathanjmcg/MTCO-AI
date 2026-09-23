@@ -1045,6 +1045,26 @@
         }
       ],
       "proposed_at": "2026-09-23"
+    },
+    {
+      "id": "kensite-credit-control-early-warning-payment-risk-signals",
+      "company": "kensite",
+      "name": "Credit Control Early Warning - Payment Risk Signals",
+      "stage": "Proposed",
+      "category": "Finance",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Picks up signals that a customer may be a payment risk, so credit control can act early rather than waiting...",
+      "scope": "Picks up signals that a customer may be a payment risk, so credit control can act early rather than waiting for the debt to build. This is not churn, which is a customer dropping off.",
+      "how": "Reads sales and payment signals, such as bills no longer being paid on time, and flags the accounts where payment risk is rising.",
+      "who": [
+        {
+          "who": "Finance and credit control",
+          "how": "earlier warning that a customer may be a payment risk, so late payers are picked up sooner."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
