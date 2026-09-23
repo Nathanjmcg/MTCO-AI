@@ -953,6 +953,26 @@
         }
       ],
       "proposed_at": "2026-09-23"
+    },
+    {
+      "id": "kensite-kensite-openrouter-account-and-shared-api-keys",
+      "company": "kensite",
+      "name": "Kensite OpenRouter Account and Shared API Keys",
+      "stage": "Proposed",
+      "category": "IT and Data",
+      "owner": "Nathan Mcguinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Gives Kensite its own funded OpenRouter account, so Ken and Hermes users draw models through one company-ow...",
+      "scope": "Gives Kensite its own funded OpenRouter account, so Ken and Hermes users draw models through one company-owned account instead of individual or ad hoc arrangements. It solves scattered, uncontrolled model access and gives staff a sanctioned route to try new models and build their own agents.",
+      "how": "Kensite creates and funds an OpenRouter account. API keys are issued from it: one for Ken, and individual or shared keys for Hermes accounts, scoped broadly or narrowly as needed. Staff then use those keys inside Hermes to create personal agents and trial new ideas and models through the OpenRouter link.",
+      "who": [
+        {
+          "who": "Nathan, Chloe and other Hermes users",
+          "how": "personal agents for daily efficiencies and assistance, plus a low-friction way to try new models. Kensite: one funded, controlled account with keys that can be scoped per person."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
