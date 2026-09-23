@@ -1065,6 +1065,30 @@
         }
       ],
       "proposed_at": "2026-09-23"
+    },
+    {
+      "id": "kensite-site-training-matrix-and-card-evidence",
+      "company": "kensite",
+      "name": "Site Training Matrix and Card Evidence",
+      "stage": "Proposed",
+      "category": "HSEQ and Compliance",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Keeps CSCS/CPCS/first-aid expiries, toolbox talks and inductions provable per person per site, rather than...",
+      "scope": "Keeps CSCS/CPCS/first-aid expiries, toolbox talks and inductions provable per person per site, rather than in a spreadsheet one person owns.",
+      "how": "Reads the card and training expiry dates and the toolbox talk and induction records, keeps them current per person per site, and produces the evidence on request. CP07 is the live case study.",
+      "who": [
+        {
+          "who": "Principal contractors",
+          "how": "competence provable under CDM"
+        },
+        {
+          "who": "Ops managers",
+          "how": "expired cards found before an audit does."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
