@@ -1157,6 +1157,30 @@
         }
       ],
       "proposed_at": "2026-09-23"
+    },
+    {
+      "id": "aes-abnormal-load-and-movement-notifications",
+      "company": "aes",
+      "name": "Abnormal Load and Movement Notifications",
+      "stage": "Proposed",
+      "category": "Transport and Logistics",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Works out and handles the notifications needed to move wide or heavy cabins and plant: ESDAL, police and hi...",
+      "scope": "Works out and handles the notifications needed to move wide or heavy cabins and plant: ESDAL, police and highway notifications and escort rules, which today are done by phone and paper by a transport clerk.",
+      "how": "Reads the movement and the load's dimensions and weight, applies the notification and escort rules, and produces the notifications that have to go out.",
+      "who": [
+        {
+          "who": "Transport",
+          "how": "fewer rejected or late notifications"
+        },
+        {
+          "who": "Haulage",
+          "how": "fewer wasted transport days."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
