@@ -1089,6 +1089,26 @@
         }
       ],
       "proposed_at": "2026-09-23"
+    },
+    {
+      "id": "kensite-hired-in-plant-insurance-verification",
+      "company": "kensite",
+      "name": "Hired-In Plant Insurance Verification",
+      "stage": "Proposed",
+      "category": "Hire Desk and Sales",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Checks that a customer's hired-in plant insurance cover is real, in date and adequate before kit leaves the...",
+      "scope": "Checks that a customer's hired-in plant insurance cover is real, in date and adequate before kit leaves the yard, and again at renewal, so we are not carrying the loss when something is stolen or damaged.",
+      "how": "Reads the customer's insurance document against the kit going out and against the renewal date, and flags anything missing, expired or inadequate, instead of relying on an email attachment someone glances at once and a tick box in MCS.",
+      "who": [
+        {
+          "who": "Hire desk and credit control",
+          "how": "uninsured-loss exposure on theft and damage claims driven towards zero."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
