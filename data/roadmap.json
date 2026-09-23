@@ -1181,6 +1181,30 @@
         }
       ],
       "proposed_at": "2026-09-23"
+    },
+    {
+      "id": "mtco-shared-ai-knowledge-repository-event-transcripts",
+      "company": "mtco",
+      "name": "Shared AI Knowledge Repository (Event Transcripts)",
+      "stage": "Proposed",
+      "category": "IT and Data",
+      "owner": "Nathan McGuinness",
+      "proposed_by": "nathan.mcguinness@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Starts a central GitHub repository stocked with session transcripts from the AI Summit, which over the long...",
+      "scope": "Starts a central GitHub repository stocked with session transcripts from the AI Summit, which over the long term becomes a private store of shared AI knowledge from events, conferences, seminars and similar. It solves the problem of what the group learns on the outside never being captured in one place, and produces a single body of reference material the shared AI agents can call on for expertise, context, ideas and reference.",
+      "how": "A central GitHub repo is set up and session transcripts are committed to it; Rishi is a named collaborator. Over time the repo is added to from other events, conferences and seminars, and the group's shared AI agents read from it for expertise, context, ideas and reference.",
+      "who": [
+        {
+          "who": "Shared AI agents across the group",
+          "how": "one place to draw expertise, context, ideas and reference"
+        },
+        {
+          "who": "the teams those agents serve",
+          "how": "answers informed by what the group has actually learned at events."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
