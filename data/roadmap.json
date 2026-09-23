@@ -1109,6 +1109,30 @@
         }
       ],
       "proposed_at": "2026-09-23"
+    },
+    {
+      "id": "aes-hazardous-waste-consignment-notes-and-consignee-returns",
+      "company": "aes",
+      "name": "Hazardous Waste Consignment Notes and Consignee Returns",
+      "stage": "Proposed",
+      "category": "HSEQ and Compliance",
+      "owner": "Chloe Ainscough",
+      "proposed_by": "chloe.ainscough@kensite.co.uk",
+      "date": "Sep 2026",
+      "summary": "Handles the paperwork around every hazardous waste consignment: the note that must accompany each one, copi...",
+      "scope": "Handles the paperwork around every hazardous waste consignment: the note that must accompany each one, copies kept for three years, and the quarterly returns consignees must file to the Agency. It chases missing copies and catches return errors.",
+      "how": "Reads the consignment notes and consignee returns and checks them against the three-year retention rule and the quarterly filing requirement, flagging missing copies and errors before they become a compliance problem. AES is a live test bed.",
+      "who": [
+        {
+          "who": "Waste carriers and tanker operators",
+          "how": "no missing consignment notes"
+        },
+        {
+          "who": "Consignee sites",
+          "how": "returns filed complete and on time."
+        }
+      ],
+      "proposed_at": "2026-09-23"
     }
   ],
   "plan": {
