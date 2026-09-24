@@ -20,7 +20,7 @@
       "id": "aes-auto-updating-schedule-for-aes",
       "company": "aes",
       "name": "Auto Updating Schedule for AES",
-      "stage": "Proposed",
+      "stage": "Building",
       "category": "Transport and Logistics",
       "owner": "Nathan Mcguinness",
       "proposed_by": "nathan.mcguinness@kensite.co.uk",
@@ -43,7 +43,10 @@
         }
       ],
       "proposed_at": "2026-09-15",
-      "updated_at": "2026-09-24"
+      "updated_at": "2026-09-24",
+      "dates": {
+        "Building": "Sep 2026"
+      }
     },
     {
       "id": "aes-aes-service-agent",
