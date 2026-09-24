@@ -26,19 +26,24 @@
       "proposed_by": "nathan.mcguinness@kensite.co.uk",
       "date": "Sep 2026",
       "summary": "Auto-updates the AES schedule and diary from Big Change job entries so the management software and the besp...",
-      "scope": "Auto-updates the AES schedule and diary from Big Change job entries so the management software and the bespoke planner match at all times, eliminating the need for manual data entry and removing the risk of mis-communication and human error.",
-      "how": "Reads job entries from Big Change and automatically syncs or pushes them into the AES management software and bespoke planner/diary, so both systems match continuously without manual re-entry.",
+      "scope": "Auto-updates the AES schedule and diary from Big Change job entries so the management software and the bespoke planning board stay in step. The planner pulls jobs directly from Big Change and populates on the day with postcode, customer and number of cabins, shows each job's ASES job ref and job PO, and auto-updates enquiries to booked jobs once the AI recognises the matching job in Big Change.",
+      "how": "Reads jobs from Big Change into the AES schedule and planner, carrying the job ref and PO on every job; missing POs glow red to alert the transport operator, and POs are needed on all jobs for reconciliation accuracy. Clicking a day opens the Transport Hub, where individual loads split out and are dragged onto a driver, unavailable drivers glow orange, and a search filters by customer, PO or postcode. Scoped next: mileage per run, per driver, using the Google API to map depot-to-job distance for truck mileage, fuel projections and wagon utilisation, and income per driver and wagon by day, month, quarter and total.",
       "who": [
         {
-          "who": "AES scheduling and transport team",
-          "how": "saves significant time currently spent on manual diary entries"
+          "who": "AES transport office",
+          "how": "every job on one board, missing POs caught early, and the schedule and diary kept in step with Big Change"
         },
         {
-          "who": "reduces human error and mis-communication between systems",
-          "how": ""
+          "who": "Planners and drivers",
+          "how": "loads allocated by drag and drop with unavailability visible"
+        },
+        {
+          "who": "Management",
+          "how": "mileage, fuel use and income per driver and wagon to judge utilisation."
         }
       ],
-      "proposed_at": "2026-09-15"
+      "proposed_at": "2026-09-15",
+      "updated_at": "2026-09-24"
     },
     {
       "id": "aes-aes-service-agent",
